@@ -1,0 +1,178 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		// {
+		// 	"path":"pages/operator/module",
+		// 	"style": {
+		// 		"navigationBarTitleText": "选择操作"
+		// 	}
+		// },
+		
+		{
+			"path": "pages/login/login",
+			"style": {
+				"backgroundColor": "#f5f6f8",
+				"navigationBarTitleText": "登录",
+				"usingComponents": {
+					"van-button": "/wxcomponents/vant-weapp/button/index",
+					"van-icon": "/wxcomponents/vant-weapp/icon/index",
+					"van-dialog": "/wxcomponents/vant-weapp/dialog/index"
+				},
+				"app-plus": {}
+			}
+		
+		},
+		{
+			"path": "pages/operator/order_lists",
+			"style": {
+				"navigationBarTitleText": "接单列表"
+			}
+		},
+		{
+			"path": "pages/operator/stock",
+			"style": {
+				"navigationBarTitleText": "设备选择"
+			}
+		},
+		{
+			"path": "pages/operator/detector_data",
+			"style": {
+				"navigationBarTitleText": "上传检测数据"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "中国检查认证集团"
+			}
+		},
+		{
+			"path": "pages/templates/detail_1",
+			"style": {
+				"navigationBarTitleText": "订单栏"
+			}
+		},
+		{
+			"path": "pages/templates/orderNew",
+			"style": {
+				"navigationBarTitleText": "新订单"
+			}
+		},
+		{
+			"path": "pages/templates/orderSubmit",
+			"style": {
+				"navigationBarTitleText": "网上预约"
+			}
+		},
+		{
+			"path": "pages/templates/detailOrder",
+			"style": {
+				"navigationBarTitleText": "订单详情"
+			}
+		},
+		{
+			"path": "pages/templates/allOrder",
+			"style": {
+				"navigationBarTitleText": "所有订单"
+			}
+		},
+		
+		{
+			"path": "pages/find-pwd/find-pwd",
+			"style": {
+				"navigationBarTitleText": "找回密码",
+				"usingComponents": {
+					"van-dialog": "/wxcomponents/vant-weapp/dialog/index"
+				}
+			}
+		}, {
+			"path": "pages/reg/reg",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"usingComponents": {
+					"van-dialog": "/wxcomponents/vant-weapp/dialog/index"
+				}
+			}
+		}, {
+			"path": "pages/reg-pwd/reg-pwd",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"usingComponents": {
+					"van-button": "/wxcomponents/vant-weapp/button/index",
+					"van-dialog": "/wxcomponents/vant-weapp/dialog/index"
+				}
+
+
+			}
+		}, {
+			"path": "pages/user-center/user_center",
+			"style": {
+				"navigationBarTitleText": "用户中心",
+				"usingComponents": {
+					"van-dialog": "/wxcomponents/vant-weapp/dialog/index"
+				}
+			}
+		},
+		{
+			"path": "pages/skin-change/skin-change",
+			"style": {
+				"navigationBarTitleText": "皮肤选择"
+			}
+		},
+
+		//      {
+		//          "path" : "pages/operator/detector_data",
+		//          "style" : {
+		// 	"navigationBarTitleText": "上传检测数据"
+		// }
+		//      },
+
+		// {
+		//     "path" : "pages/operator/stock",
+		//     "style" : {}
+		// },
+		{
+			"path": "pages/operator/express_data",
+			"style": {
+				"navigationBarTitleText": "快递填写"
+			}
+		},
+		{
+			"path": "pages/operator/detailOrder",
+			"style": {
+				"navigationBarTitleText": "订单详情"
+			}
+		},
+		{
+			"path": "pages/operator/order_process",
+			"style": {
+				"navigationBarTitleText": "流程"
+			}
+		},
+		{
+            "path" : "pages/report/report",
+            "style" : {
+				"navigationBarTitleText": "检验报告下载"
+			}
+        },
+		{
+			"path": "pages/operator/workReport",
+			"style": {
+				"navigationBarTitleText": "施工流程"
+			}
+		},
+		{
+			"path":"pages/operator/traceBlock",
+			"style": {
+				"navigationBarTitleText": "溯源信息"
+			}
+		}
+		
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"enablePullDownRefresh": true
+	}
+}
