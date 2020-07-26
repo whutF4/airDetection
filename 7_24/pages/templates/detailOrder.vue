@@ -33,8 +33,9 @@
 		<view class="cu-form-group">
 			<view class="title">户型图</view>
 		</view>
-		<view class="cu-form-group">
-			<image :src="imgPath"></image>
+			
+		<view class="cu-form-group" v-for="i in imgPath.length" :key='i'>
+			<image :src="imgPath[i]"></image>
 		</view>
 		
 		<view class="cu-form-group">
@@ -66,6 +67,7 @@
 </template>
 
 <script>
+	import helper from "../../common/help.js"
 	export default {
 		data() {
 			return {
@@ -75,7 +77,7 @@
 				orderClass: '',
 				orderScope: '',
 				orderDescripe: '',
-				imgPath: '../../static/zhongjian2.jpg',
+				imgPath: [],
 				specialPollution: '',
 				date: '',
 				time: '',
@@ -93,12 +95,19 @@
 			that.orderClass = info.order_class
 			that.orderScope = info.order_scope
 			that.orderDescripe = info.order_descripe
-			// that.imgPath = info.orderModelf 不能成功显示图像
+			// that.imgPath = helper.url + '/' + info.orderModelf
 			that.specialPollution = info.order_pollution
 			that.date = info.order_createtime.split(' ')[0]
 			that.time = info.order_createtime.split(' ')[1]
 			// that.moreMoney = info.orderReport 后台未获取
+			that.moreMoney = info.order_report
 			that.orderOther = info.order_others
+			console.log('imgpath', info.order_modelf)
+			var imgUrls = info.order_modelf.split('@')
+			for(var i=0;i<imgUrls.length-1;i++){
+				
+				that.imgPath.push(helper.url + '/' + imgUrls[i])
+			}
 			
 			
 			

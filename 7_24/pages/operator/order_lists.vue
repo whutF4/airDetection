@@ -1,6 +1,17 @@
 <template>
 	<view>
-		<view class="order" v-for="(info, index) in orderLists" :key='index'>
+		<scroll-view scroll-x class="bg-white nav">
+			<view class="flex text-center">
+				
+				<view class="cu-item flex-sub" :class="0==TabCur?'text-orange':''" @tap="tabSelect" data-id="0">
+					待完成
+				</view>
+				<view class="cu-item flex-sub" :class="1==TabCur?'text-orange':''" @tap="tabSelect" data-id="1">
+					已完成
+				</view>
+			</view>
+		</scroll-view>
+		<view class="order" v-for="(info, index) in orderLists" :key='index' v-if="index<pagesize">
 			<view @click="detail(index)">
 				<view class="headPart">
 					<view>订单编号 {{info.order_id}}</view>
@@ -26,11 +37,10 @@
 			</view>
 			<view class="footPart">
 				<button type="primary" size="mini" @click="confirm(index)">确定</button>
-				<button type="warn" size="mini" @click="temp(index)">反馈</button>
+				<button type="warn" size="mini">反馈</button>
 			</view>
 			
 		</view>
-		
 	</view>
 </template>
 
@@ -44,7 +54,11 @@
 				orderId: '',
 				orderLists: [
 					
-				]
+				],
+				// pagenum:1,
+				pagesize:5,
+				TabCur:0,
+				state:"待发货"
 				
 			}
 		},
@@ -74,6 +88,18 @@
 			})
 			
 		},
+		onReachBottom(){
+			uni.showLoading({
+			    title: '加载中'
+			});
+			
+			setTimeout(function () {
+			    uni.hideLoading();
+			}, 1000);
+			var that = this
+			this.pagesize+=5;
+			console.log(this.pagesize)
+		},
 		methods: {
 			detail(index){
 				var that = this
@@ -102,12 +128,13 @@
 						console.log('processId:', res.data.data.process_id)
 						// that.processId = res.data.data.process_id
 						uni.navigateTo({
-							url: 'stock?processId=' + res.data.data.process_id
+							url: 'module?processId=' + res.data.data.process_id
 						})
 					}
 				})
 				
 			},
+			// 无用方法
 			temp(index){
 				var that = this
 				console.log('orderId:', that.orderLists[index].order_id)
@@ -115,6 +142,10 @@
 				uni.navigateTo({
 					url: 'traceBlock?orderId=' + that.orderId
 				})
+			},
+			tabSelect(e) {
+				this.TabCur = e.currentTarget.dataset.id;
+				this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
 			}
 		}
 	}

@@ -24,8 +24,8 @@
 				</view>
 			</view>
 			<view class="footPart">
-				<button type="primary" size="mini" @click="confirm(index)">确定</button>
-				<button type="warn" size="mini">反馈</button>
+				<button type="primary" size="mini" @click="confirm(index)">详情</button>
+				<button type="warn" size="mini" @click="traceInfo(index)">溯源</button>
 			</view>	
 		</view>
 		<view class="cu-bar tabbar bg-white shadow foot">
@@ -112,6 +112,14 @@
 				});
 			},
 			confirm(index){
+				var that = this
+				console.log('orderId:', that.orderLists[index].order_id)
+				that.orderId = that.orderLists[index].order_id
+				uni.navigateTo({
+					url: 'traceBlock?orderId=' + that.orderId
+				})
+			},
+			traceInfo(index){
 				var that = this
 				console.log('orderId:', that.orderLists[index].order_id)
 				that.orderId = that.orderLists[index].order_id

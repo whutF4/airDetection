@@ -133,7 +133,7 @@
 					success: function (res) {//后端返回数据
 						console.log(res)
 						uni.navigateTo({
-							url:"express_data?processId=" + that.processId
+							url:"module?processId=" + that.processId
 						})
 					},
 				})

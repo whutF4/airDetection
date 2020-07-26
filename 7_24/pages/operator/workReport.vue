@@ -6,19 +6,6 @@
 		<view class="cu-form-group">
 			<textarea v-model="describe" placeholder="简短说明描述......" maxlength="-1" auto-height></textarea>
 		</view>
-
-		<!-- <view class="cu-form-group margin-top">
-			<view>
-		        <uImg  ref="upimg"
-		            :canUploadFile="true" 
-		            :limit="limitNum"
-		            :uploadFileUrl="uploadFileUrl" 
-		            :heaer="header" 
-		            :fileKeyName="name"
-		            :uImgList.sync="uImgList" 
-		            @uploadSuccess="uploadSuccess"></uImg>
-		    </view>
-		</view> -->
 		
 		<view class="cu-bar bg-white margin-top">
 			<view class="action">图片上传</view>
@@ -41,7 +28,7 @@
 		
 		
 		<view class="nextStep">
-			<button type="primary" @click="nextStep1">下一步</button>
+			<button type="primary" @click="nextStep">下一步</button>
 		</view>
 		<view class="end">
 			<button type="warn" @click="endStep">结束</button>
@@ -93,62 +80,6 @@
 			        toast('上传失败')
 			    }
 			},
-			//上传方法的调用
-			nextStep(){
-				var that = this
-				
-				console.log('processId:', that.processId)
-				console.log('desc:', that.describe)
-				uni.request({
-					method: 'POST',
-					url: helper.url + '/api/report/add_report_describes',
-					header:{
-						'Content-Type': 'application/x-www-form-urlencoded',
-						'Cookie':'JSESSIONID='+helper.sessionId
-					},
-					data:{
-						'process_id': that.processId,
-						'describes': that.describe
-					},
-					success(res) {
-						console.log(res)
-					}
-				})
-				that.uImgList = []
-				that.describe = ''
-				return;
-				
-				
-				
-				console.log('sessionId:', helper.sessionId)
-				if(that.describe && that.uImgList.length){
-					that.$refs.upimg.upload()
-					uni.request({
-						method: 'POST',
-						url: helper.url + '/api/report/add_report_describes',
-						header:{
-							'Content-Type': 'application/x-www-form-urlencoded',
-							'Cookie':'JSESSIONID='+helper.sessionId
-						},
-						data:{
-							'process_id': that.processId,
-							'describes': that.describe
-						},
-						success(res) {
-							console.log(res)
-							if(statusCode == 200){
-								
-							}
-						}
-					})
-					that.uImgList = []
-					that.describe = ''
-				}else{
-					toast('描述和图片均不可为空！')
-					
-				}
-			    
-			},
 			ChooseImage() {
 				uni.chooseImage({
 					count: this.limitNum, //默认9
@@ -183,7 +114,7 @@
 					}
 				})
 			},
-			nextStep1(){
+			nextStep(){
 				var that = this
 				if(that.describe && that.imgList.length){
 					console.log('processId:', that.processId)
@@ -256,29 +187,15 @@
 			
 			endStep(){
 				var that = this
-				if(that.describe && that.imgList.length){
-					that.nextStep1()
+				if((that.describe == '' && that.imgList.length != 0) || (that.describe != '' && that.imgList.length == 0)){
+					toast('描述和图片要一致！')
+					return;
+				}else if(that.describe && that.imgList.length){
+					that.nextStep()
 				}
 				uni.navigateTo({
-					url:'detector_data?processId=' + that.processId
+					url:'module?processId=' + that.processId
 				})
-				// uni.request({
-				// 	url: helper.url + '/api/operator/report_pic_upload_close',
-				// 	method:'POST',
-				// 	data:{
-				// 		'process_id': that.processId
-				// 	},
-				// 	success(res) {
-				// 		if(res.data.status == 200){
-				// 			uni.navigateTo({
-				// 				url:'detector_data?processId=' + that.processId
-				// 			})
-				// 		}else{
-				// 			toast('未知错误！')
-				// 		}
-				// 	}
-				// })
-				
 			}
 			
 		}

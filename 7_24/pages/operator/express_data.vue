@@ -190,7 +190,7 @@
 					},
 					success: function (res) {//后端返回数据
 						console.log(res)
-						uni.navigateTo({
+						uni.reLaunch({
 							url:"order_lists"
 						})
 					},

@@ -1,12 +1,5 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		// {
-		// 	"path":"pages/operator/module",
-		// 	"style": {
-		// 		"navigationBarTitleText": "选择操作"
-		// 	}
-		// },
-		
 		{
 			"path": "pages/login/login",
 			"style": {
@@ -22,9 +15,16 @@
 		
 		},
 		{
+			"path":"pages/operator/module",
+			"style": {
+				"navigationBarTitleText": "选择操作"
+			}
+		},
+		{
 			"path": "pages/operator/order_lists",
 			"style": {
-				"navigationBarTitleText": "接单列表"
+				"navigationBarTitleText": "接单列表",
+				"enablePullDownRefresh":true
 			}
 		},
 		{
@@ -103,7 +103,8 @@
 
 
 			}
-		}, {
+		},
+		{
 			"path": "pages/user-center/user_center",
 			"style": {
 				"navigationBarTitleText": "用户中心",
@@ -161,7 +162,7 @@
 			}
 		},
 		{
-			"path":"pages/operator/traceBlock",
+			"path":"pages/templates/traceBlock",
 			"style": {
 				"navigationBarTitleText": "溯源信息"
 			}

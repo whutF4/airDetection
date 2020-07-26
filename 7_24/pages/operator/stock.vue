@@ -154,7 +154,7 @@
 				})
 				// console.log('confirm:')
 				uni.navigateTo({
-					url:'workReport?processId=' + that.processId
+					url:'module?processId=' + that.processId
 				})
 				
 			}
@@ -201,38 +201,6 @@
 					
 				}
 			})
-			// uni.request({
-			// 	method: 'POST',
-			// 	// 倒计时剩余时间接口
-			// 	url: helper.url+'/api/operator/get_count_time',
-			// 	header :{
-			// 		'Content-Type': 'application/json',
-			// 		// 'Content-Type': "multipart/form-data",
-			// 		// 'Content-Type': 'application/x-www-form-urlencoded',
-			// 		'Cookie':'JSESSIONID='+helper.sessionId
-			// 	},
-			// 	data: {
-			// 		'process_id': that.processId
-			// 	},
-			// 	success(res) {
-			// 		console.log('倒计时请求ok', res.data)
-			// 		// 后台返回剩余时间
-			// 		var totleSeconds = res.data.data
-			// 		setInterval(function(){
-			// 			var innerTotleSeconds = totleSeconds
-			// 			var innerHour = parseInt(innerTotleSeconds/(60*60))
-			// 			innerTotleSeconds %= (60*60)
-			// 			var innerMinute = parseInt(innerTotleSeconds/(60))
-			// 			innerTotleSeconds %= (60)
-			// 			var innerSecond = parseInt(innerTotleSeconds)
-			// 			totleSeconds -= 1
-			// 			that.hour = innerHour
-			// 			that.minute = innerMinute
-			// 			that.second = innerSecond
-			// 		}, 1000)
-					
-			// 	}
-			// })
 			console.log('stock')
 			
 			

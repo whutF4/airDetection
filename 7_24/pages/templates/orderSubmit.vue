@@ -50,7 +50,7 @@
 			
 			<view class="cu-bar bg-white margin-top">
 				<view class="action">图片上传</view>
-				<view class="action">{{imgList.length}}/1</view>
+				<view class="action">{{imgList.length}}/{{imgNum}}</view>
 			</view>
 			<view class="cu-form-group">
 				<view class="grid col-4 grid-square flex-sub">
@@ -60,7 +60,7 @@
 							<text class='cuIcon-close'></text>
 						</view>
 					</view>
-					<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
+					<view class="solids" @tap="ChooseImage" v-if="imgList.length<imgNum">
 						<text class='cuIcon-cameraadd'></text>
 					</view>
 				</view>
@@ -125,6 +125,12 @@
 
 <script>
 	import helper from "../../common/help.js"
+	let toast= msg=>{
+	        uni.showToast({
+	            title: msg,
+	            icon:'none'
+	        });
+	}
 	export default {
 		data() {
 			return {
@@ -155,6 +161,8 @@
 				orderClass: '2',
 				orderClassOther: '',
 				imgList: [],
+				imgPath: '',
+				imgNum: 4, //支持用户上传最大图片数量
 				specialPollution: '',
 				moreMoney: 0,
 				time: '',
@@ -204,8 +212,9 @@
 				items[items.length - 1].checked = true;
 			},
 			ChooseImage() {
+				var that = this
 				uni.chooseImage({
-					count: 1, //默认9
+					count: that.imgNum, //默认9
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['album'], //从相册选择
 					success: (res) => {
@@ -313,76 +322,80 @@
 					imgUrl = that.imgList[0]
 				}
 				console.log('sessionId0:' + helper.sessionId)
-				uni.uploadFile({
-					url: helper.url+'/api/order/upload_pictures',
-					header: {  
-					    'Content-Type': "multipart/form-data",
-						'Cookie':'JSESSIONID='+helper.sessionId
-					},  
-					filePath:imgUrl,
-					name:'file',
-					formData:{
-						// 'order_contact': that.orderContact,
-						// 'order_phone': that.orderPhone,
-						// 'order_address': that.orderAddress,
-						// 'order_scope': that.orderScope,
-						// 'order_descripe': that.orderDescripe,
-						// 'order_class': that.orderClass,
-						// 'order_time': that.date + ' ' + that.time,
-						// 'order_pollution': that.specialPollution,
-						// 'order_moremoney': that.moreMoney,
-						// 'order_others': that.orderOther,
-						
-						
-					},
-					success(res) {
-							var jsonData = JSON.parse(res.data)
-							console.log('jsonData:' + jsonData.data)
-							console.log(typeof(jsonData))
-							console.log('图片上传成功')
-							var imgPath = jsonData.data
-							console.log('sessionId:' + helper.sessionId)
-							console.log(res)
-							console.log('imgPath:' + imgPath)
-							uni.request({
-								method: 'POST',
-								url: helper.url+'/api/order/add',
-								header :{
-									'Content-Type': 'application/json',
-									// 'Content-Type': "multipart/form-data",
-									// 'Content-Type': 'application/x-www-form-urlencoded',
-									'Cookie':'JSESSIONID='+helper.sessionId
-								},
-								data: {
-									'order_contact': that.orderContact,
-									'order_phone': that.orderPhone,
-									'order_address': that.orderAddress,
-									'order_scope': that.orderScope,
-									'order_descripe': that.orderDescripe,
-									'order_class': that.orderClass,
-									// 'orderClass': 2,
-									'order_time': that.date + ' ' + that.time,
-									'order_pollution': that.specialPollution,
-									// 'orderPollution': 1,
-									'order_report': that.moreMoney,
-									// 'orderReport': 1,
-									'order_others': that.orderOther,
-									'order_modelf': imgPath
-								},
-								success(res) {
-									if(res.data.status==200){
-										console.log('表单代码上传成功')
-										uni.navigateTo({
-											url:'allOrder',
-										})
-									}
+				var tempCount = 0
+				var lenImg = that.imgList.length
+				for(var i=0; i<lenImg;i++){
+					toast('图片上传中...')
+					var imgUrl = that.imgList[i]
+					uni.uploadFile({
+						url: helper.url+'/api/order/upload_pictures',
+						header: {  
+							'Content-Type': "multipart/form-data",
+							'Cookie':'JSESSIONID='+helper.sessionId
+						},  
+						filePath:imgUrl,
+						name:'file',
+						formData:{
+							// 'process_id': that.processId
+						},
+						success(res) {
+							if(res.statusCode == 200){
+								var imgPathData = JSON.parse(res.data)
+								console.log('全部返回：', res)
+								console.log('图片返回：', imgPathData)
+								that.imgPath = that.imgPath + imgPathData.data
+								console.log('图片上传成功！')
+								console.log(that.imgPath)
+								tempCount = tempCount + 1
+								console.log(tempCount, lenImg)
+								if(tempCount == lenImg){
+									uni.request({
+										method: 'POST',
+										url: helper.url+'/api/order/add',
+										header :{
+											'Content-Type': 'application/json',
+											// 'Content-Type': "multipart/form-data",
+											// 'Content-Type': 'application/x-www-form-urlencoded',
+											'Cookie':'JSESSIONID='+helper.sessionId
+										},
+										data: {
+											'order_contact': that.orderContact,
+											'order_phone': that.orderPhone,
+											'order_address': that.orderAddress,
+											'order_scope': that.orderScope,
+											'order_descripe': that.orderDescripe,
+											'order_class': that.orderClass,
+											// 'orderClass': 2,
+											'order_time': that.date + ' ' + that.time,
+											'order_pollution': that.specialPollution,
+											// 'orderPollution': 1,
+											'order_report': that.moreMoney,
+											// 'orderReport': 1,
+											'order_others': that.orderOther,
+											'order_modelf': that.imgPath
+										},
+										success(res) {
+											if(res.data.status==200){
+												console.log('表单代码上传成功')
+												uni.reLaunch({
+													url:'allOrder',
+												})
+											}
+										},
+										fail(res) {
+											console.log(res)
+										}
+									})
 								}
-							})
-					},
-					fail(res) {
-						console.log(res)
-					}
-				})
+							}else{
+								console.log(res)
+							}
+								
+						}
+					})
+				}
+				that.imgList = []
+				tempCount = 0
 			}
 			
 		}
