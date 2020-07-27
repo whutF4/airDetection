@@ -24,7 +24,7 @@
 				</view>
 			</view>
 			<view class="footPart">
-				<button type="primary" size="mini" @click="confirm(index)">详情</button>
+				<button type="primary" size="mini" @click="downLoadFile(index)">下载报告</button>
 				<button type="warn" size="mini" @click="traceInfo(index)">溯源</button>
 			</view>	
 		</view>
@@ -53,7 +53,12 @@
 </template>
 
 <script>
-
+	let toast= msg=>{
+	    uni.showToast({
+	        title: msg,
+	        icon:'none'
+	    });
+	}
 	import helper from "../../common/help.js"
 	export default {
 		data() {
@@ -62,7 +67,8 @@
 				orderId: '',
 				orderLists: [
 					
-				]
+				],
+				filePath: ''
 				
 			}
 		},
@@ -111,12 +117,25 @@
 						url: '../user-center/user_center'
 				});
 			},
-			confirm(index){
+			downLoadFile(index){
 				var that = this
-				console.log('orderId:', that.orderLists[index].order_id)
-				that.orderId = that.orderLists[index].order_id
-				uni.navigateTo({
-					url: 'traceBlock?orderId=' + that.orderId
+				const downLoadTask = uni.downloadFile({
+					url: helper.url + '/' + 'filePath',
+					header: {
+						'Content-Type': "multipart/form-data",
+						'Cookie':'JSESSIONID='+helper.sessionId
+					}, 
+					success(res) {
+						if(res.statusCode == 200){
+							uni.saveFile({
+								tempFilePath: res.tempFilePath,
+								success(e) {
+									that.filePath = e.savedFilePath
+									toast('文件下载成功！')
+								}
+							})
+						}
+					}
 				})
 			},
 			traceInfo(index){
