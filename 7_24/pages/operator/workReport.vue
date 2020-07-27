@@ -40,11 +40,11 @@
 <script>
 	import helper from "../../common/help.js"
 	import uImg from '@/components/zhtx-uploadImg/zhtx-uploadImg.vue'
-	    let toast= msg=>{
-	        uni.showToast({
-	            title: msg,
-	            icon:'none'
-	        });
+	let toast= msg=>{
+	    uni.showToast({
+	        title: msg,
+	        icon:'none'
+	    });
 	}
 	export default{
 		components:{uImg},
