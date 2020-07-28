@@ -142,7 +142,7 @@
 				var that = this
 				var info = JSON.stringify(that.orderLists[index])
 				// console.log('orderId:', that.orderLists[index].order_id)
-				that.orderId = that.orderLists[index].order_id
+				// that.orderId = that.orderLists[index].order_id
 				uni.navigateTo({
 					url: 'traceBlock?info=' + info
 				})

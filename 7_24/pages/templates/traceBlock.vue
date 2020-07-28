@@ -62,7 +62,6 @@
 			for(var i=0;i<imgUrls.length-1;i++){
 				that.imgPath.push(helper.url + '/' + imgUrls[i])
 			}
-			
 			uni.request({
 				method: 'POST',
 				url: helper.url + '/api/report/show_report_info',
