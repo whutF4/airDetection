@@ -159,6 +159,7 @@
 	}
 	.order{
 		margin-top: 20rpx;
+		margin-bottom: calc(100upx + env(safe-area-inset-bottom) / 2);
 		padding: 0 20rpx;
 		background-color: #ffffff;
 		
