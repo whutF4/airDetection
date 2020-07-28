@@ -1,71 +1,26 @@
 <template>
 	<view>
 		<uni-collapse accordion="true">
-		    <uni-collapse-item class="titleColor" title="订单信息">
+		    <uni-collapse-item class="titleColor" title="订单信息" open="true">
 		        <view>
 		            <uni-list>
 		            	<view class="cu-form-group margin-top">
 		            		<view class="title">客户姓名</view>
-		            		<input v-model="orderContact" disabled="true"></input>
-		            	</view>
-		            	
-		            	<view class="cu-form-group">
-		            		<view class="title">联系电话</view>
-		            		<input v-model="orderPhone" disabled="true" ></input>
+		            		<input v-model="info.order_contact" disabled="true"></input>
 		            	</view>
 		            	
 		            	<view class="cu-form-group">
 		            		<view class="title">联系地址</view>
-		            		<input v-model="orderAddress" disabled="true" ></input>
+		            		<input v-model="info.order_address" disabled="true" ></input>
 		            	</view>
-		            	
-		            	<view class="cu-form-group">
-		            		<view class="title">检测类型</view>
-		            		<input v-model="orderClass" disabled="true" ></input>
-		            	</view>
-		            	
-		            	<view class="cu-form-group">
-		            		<view class="title">户型面积</view>
-		            		<input v-model="orderScope" disabled="true" ></input>
-		            	</view>
-		            	
-		            	<view class="cu-form-group">
-		            		<view class="title">户型描述</view>
-		            		<input v-model="orderDescripe" disabled="true" ></input>
-		            	</view>
-		            	
-		            	<view class="cu-form-group">
-		            		<view class="title">户型图</view>
-		            	</view>
-		            	<view class="cu-form-group">
-		            		<image :src="imgPath"></image>
-		            	</view>
-		            	
-		            	<view class="cu-form-group">
-		            		<view class="title">特殊污染材料</view>
-		            		<input v-model="specialPollution" disabled="true" ></input>
-		            	</view>
-		            	
-		            	<view class="cu-form-group">
-		            		<view class="title">约定日期</view>
-		            		<input v-model="date" disabled="true" ></input>
-		            	</view>
-		            	
-		            	<view class="cu-form-group">
-		            		<view class="title">约定时间</view>
-		            		<input v-model="time" disabled="true" ></input>
-		            	</view>
-		            	
-		            	<view class="cu-form-group">
-		            		<view class="title">是否需要检测报告</view>
-		            		<input v-model="moreMoney" disabled="true" ></input>
-		            	</view>
-		            	
-		            	<view class="cu-form-group">
-		            		<view class="title">其它说明</view>
-		            		<!-- <textarea v-model="orderOther" disabled="true" ></textarea> -->
-		            		<textarea v-model="orderOther" ></textarea>
-		            	</view>
+						
+						<view class="cu-form-group">
+							<view class="title">户型图</view>
+						</view>							
+						<view class="cu-form-group" v-for="i in imgPath.length" :key='i'>
+							<image :src="imgPath[i]"></image>
+						</view>
+						
 		            </uni-list>
 		        </view>
 		    </uni-collapse-item>
@@ -91,13 +46,23 @@
 			return {
 				orderId: '',
 				desc: [],
-				descImg: []
+				descImg: [], // 施工报告图片地址
+				info: '',
+				imgPath: [] // 用户户型图地址
+				
 			}
 		},
 		onLoad(option) {
 			var that = this
-			that.orderId = option.orderId
+			that.info = JSON.parse(option.info)
+			that.orderId = info.order_id
 			console.log('施工报告请求...', that.orderId)
+			
+			var imgUrls = info.order_modelf.split('@')
+			for(var i=0;i<imgUrls.length-1;i++){
+				that.imgPath.push(helper.url + '/' + imgUrls[i])
+			}
+			
 			uni.request({
 				method: 'POST',
 				url: helper.url + '/api/report/show_report_info',
