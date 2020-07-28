@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "施工流程",
+  "usingComponents": {
+    "u-img": "/components/zhtx-uploadImg/zhtx-uploadImg"
+  }
+}

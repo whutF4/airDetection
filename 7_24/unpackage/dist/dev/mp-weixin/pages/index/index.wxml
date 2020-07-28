@@ -1,0 +1,1 @@
+<view class="content data-v-57280228"><button type="primary" data-event-opts="{{[['tap',[['toload',['$event']]]]]}}" bindtap="__e" class="data-v-57280228">单击开始登陆</button><button type="primary" data-event-opts="{{[['tap',[['tousercenter',['$event']]]]]}}" bindtap="__e" class="data-v-57280228">进入用户中心</button></view>

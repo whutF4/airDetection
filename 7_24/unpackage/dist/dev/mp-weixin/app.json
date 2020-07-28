@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/operator/module",
+    "pages/operator/order_lists",
+    "pages/operator/stock",
+    "pages/operator/detector_data",
+    "pages/index/index",
+    "pages/templates/detail_1",
+    "pages/templates/orderNew",
+    "pages/templates/orderSubmit",
+    "pages/templates/detailOrder",
+    "pages/templates/allOrder",
+    "pages/find-pwd/find-pwd",
+    "pages/reg/reg",
+    "pages/reg-pwd/reg-pwd",
+    "pages/user-center/user_center",
+    "pages/skin-change/skin-change",
+    "pages/operator/express_data",
+    "pages/operator/detailOrder",
+    "pages/operator/order_process",
+    "pages/report/report",
+    "pages/operator/workReport",
+    "pages/templates/traceBlock"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "enablePullDownRefresh": true
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom",
+    "uni-popup": "/components/uni-popup/uni-popup",
+    "uni-list": "/components/uni-list/uni-list",
+    "uni-list-item": "/components/uni-list-item/uni-list-item",
+    "lb-picker": "/components/lb-picker/index",
+    "uni-countdown": "/components/uni-countdown/uni-countdown"
+  },
+  "sitemapLocation": "sitemap50.json"
+}

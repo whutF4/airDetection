@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "流程",
+  "usingComponents": {
+    "uni-steps": "/components/uni-steps/uni-steps",
+    "uni-countdown": "/components/uni-countdown/uni-countdown"
+  }
+}

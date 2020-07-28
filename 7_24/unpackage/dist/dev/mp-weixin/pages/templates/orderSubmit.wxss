@@ -1,0 +1,27 @@
+
+.cu-form-group .title {
+	min-width: calc(4em + 15px);
+}
+.cu-form-group .checkBox{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+}
+.cu-form-group .checkBox .round{
+	margin-right: 5%;
+}
+.showMsg{
+	border-bottom:1rpx #ED1C24 solid;
+}
+.form1{
+	margin-bottom: calc(100rpx + env(safe-area-inset-bottom) / 2);
+}
+.btn{
+	margin-bottom: 20%;
+}
+
+
