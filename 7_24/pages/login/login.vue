@@ -437,8 +437,9 @@
 		justify-content: space-between;
 
 		.text {
-			font-size: 13px;
+			font-size: 28rpx;
 			color: rgba(200, 200, 200, 1);
+			margin-bottom: 10%;
 		}
 	}
 
@@ -456,7 +457,7 @@
 		}
 
 		.text {
-			font-size: 13px;
+			font-size: 28rpx;
 			color: rgba(200, 200, 200, 1);
 			margin: 2px;
 		}
