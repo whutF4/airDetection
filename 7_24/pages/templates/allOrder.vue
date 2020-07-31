@@ -9,7 +9,9 @@
 				</view>
 				<view class="imgComments">
 					<view class="orderImg">
-						<image src="../../static/zhongjian2.jpg" mode="widthFix"></image>
+						<!-- mode="widthFix" 加载时图片会闪动 -->
+						<!-- <image :src="orderimgs[index]" mode="widthFix"></image> -->
+						<image :src="orderimgs[index]"></image>
 					</view>
 					<view class="commentDetail">
 						<view>{{info.order_contact}}</view>
@@ -68,6 +70,7 @@
 				orderLists: [
 					
 				],
+				orderImgs: [], // 存储订单列表中第一张户型图地址
 				filePath: ''
 				
 			}
@@ -89,6 +92,7 @@
 					that.orderLists = res.data
 					for(var i=0; i<that.orderLists.length;i++){
 						that.orderLists[i].order_time = res.data[i].order_time.split(' ')[0]
+						that.orderImgs.push(helper.url + '/' + that.orderLists[i].order_modelf.split('@')[0])
 					}
 				}
 			})
