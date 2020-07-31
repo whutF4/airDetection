@@ -24,10 +24,10 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-page.data-v-6f8cea10 {
+page.data-v-39037a08 {
   background-color: #f5f6f8;
 }
-.page_reg.data-v-6f8cea10 {
+.page_reg.data-v-39037a08 {
   height: 100%;
   margin: 30px;
   display: -webkit-box;
@@ -44,14 +44,14 @@ page.data-v-6f8cea10 {
   -webkit-justify-content: center;
           justify-content: center;
 }
-.tip.data-v-6f8cea10 {
+.tip.data-v-39037a08 {
   font-size: 13px;
   color: #B6B6B6;
 }
-.text1.data-v-6f8cea10 {
+.text1.data-v-39037a08 {
   margin-left: 30rpx;
 }
-.code.data-v-6f8cea10 {
+.code.data-v-39037a08 {
   width: 100%;
   min-height: 65px;
   display: -webkit-box;
@@ -69,15 +69,15 @@ page.data-v-6f8cea10 {
           justify-content: space-between;
   border-bottom: 1px solid #d6d6d6;
 }
-.code .submit.data-v-6f8cea10 {
+.code .submit.data-v-39037a08 {
   background: #f2f2f3;
   color: #3772bf;
   border: 1px solid #3772bf;
 }
-.code .submit.data-v-6f8cea10:active {
+.code .submit.data-v-39037a08:active {
   background: fade(#3772bf, 8%);
 }
-.pwd.data-v-6f8cea10 {
+.pwd.data-v-39037a08 {
   width: 100%;
   margin-top: 10px;
   min-height: 65px;
@@ -93,7 +93,7 @@ page.data-v-6f8cea10 {
           align-items: center;
   border-bottom: 1px solid #d6d6d6;
 }
-.img.data-v-6f8cea10 {
+.img.data-v-39037a08 {
   min-width: 40px;
   min-height: 40px;
   margin: 5px;
@@ -111,48 +111,48 @@ page.data-v-6f8cea10 {
   -webkit-flex-direction: row;
           flex-direction: row;
 }
-.img_pwd_switch.data-v-6f8cea10 {
+.img_pwd_switch.data-v-39037a08 {
   width: 28px;
   height: 12px;
 }
-.serviceloc.data-v-6f8cea10 {
+.serviceloc.data-v-39037a08 {
   margin-top: 30rpx;
 }
-.checkbox.data-v-6f8cea10 {
+.checkbox.data-v-39037a08 {
   margin-top: 100rpx;
 }
-.protocol_tip.data-v-6f8cea10 {
+.protocol_tip.data-v-39037a08 {
   margin-top: 30rpx;
   font-size: 16px;
   color: #B6B6B6;
 }
-.link.data-v-6f8cea10 {
+.link.data-v-39037a08 {
   color: #3a8de8;
 }
-.back11.data-v-6f8cea10 {
+.back11.data-v-39037a08 {
   margin-top: 15px;
   background: #f2f2f3;
   color: #3772bf;
   border: 1px solid #3772bf;
 }
-.back11.data-v-6f8cea10:active {
+.back11.data-v-39037a08:active {
   background: fade(#3772bf, 8%);
 }
-.delphone.data-v-6f8cea10 {
+.delphone.data-v-39037a08 {
   margin-right: 50rpx;
   width: 50rpx;
   height: 50rpx;
 }
-.hidepwd.data-v-6f8cea10 {
+.hidepwd.data-v-39037a08 {
   margin-right: 50rpx;
   width: 50rpx;
   height: 30rpx;
 }
-.swiper-box.data-v-6f8cea10 {
+.swiper-box.data-v-39037a08 {
   width: 750rpx;
   height: 380rpx;
 }
-.swiper-item.data-v-6f8cea10 {
+.swiper-item.data-v-39037a08 {
   width: 750rpx;
   height: 380rpx;
 }

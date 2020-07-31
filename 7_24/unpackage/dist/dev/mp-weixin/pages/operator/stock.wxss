@@ -24,7 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.numberControl.data-v-2895ed24 {
+.numberControl.data-v-5ddfc6b8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -32,7 +32,7 @@
   -webkit-align-items: center;
           align-items: center;
 }
-.numberControl .reduce.data-v-2895ed24, .numberControl .add.data-v-2895ed24 {
+.numberControl .reduce.data-v-5ddfc6b8, .numberControl .add.data-v-5ddfc6b8 {
   width: 60rpx;
   height: 45rpx;
   background-color: #007AFF;
@@ -42,7 +42,7 @@
   color: white;
   border-radius: 10rpx;
 }
-.numberControl .num.data-v-2895ed24 {
+.numberControl .num.data-v-5ddfc6b8 {
   padding: 0 15rpx;
 }
 

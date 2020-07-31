@@ -14,7 +14,7 @@
 			</view>
 			<view class="cu-tabbar-height"></view>
 		</scroll-view>
-		<button class="submit" plain="true" @tap="next">下一步</button>
+		<!-- <button class="submit" plain="true" @tap="next">下一步</button> -->
 	</view>
 </template>
 

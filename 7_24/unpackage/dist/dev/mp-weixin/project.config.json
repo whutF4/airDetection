@@ -9,7 +9,7 @@
 		"es6": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "",
+	"libVersion": "2.9.2",
 	"appid": "wx0656326b8fdbe56f",
 	"projectname": "uni-airDetection",
 	"simulatorType": "wechat",

@@ -55,10 +55,10 @@
 		onLoad(option) {
 			var that = this
 			that.info = JSON.parse(option.info)
-			that.orderId = info.order_id
+			that.orderId = that.info.order_id
 			console.log('施工报告请求...', that.orderId)
 			
-			var imgUrls = info.order_modelf.split('@')
+			var imgUrls = that.info.order_modelf.split('@')
 			for(var i=0;i<imgUrls.length-1;i++){
 				that.imgPath.push(helper.url + '/' + imgUrls[i])
 			}

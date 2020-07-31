@@ -144,7 +144,7 @@ function queue(hooks, data) {
   for (var i = 0; i < hooks.length; i++) {
     var hook = hooks[i];
     if (promise) {
-      promise = Promise.resolve(wrapperHook(hook));
+      promise = Promise.then(wrapperHook(hook));
     } else {
       var res = hook(data);
       if (isPromise(res)) {
@@ -346,9 +346,9 @@ function upx2px(number, newDeviceWidth) {
   result = Math.floor(result + EPS);
   if (result === 0) {
     if (deviceDPR === 1 || !isIOS) {
-      result = 1;
+      return 1;
     } else {
-      result = 0.5;
+      return 0.5;
     }
   }
   return number < 0 ? -result : result;
@@ -421,10 +421,7 @@ var protocols = {
 
 
 var todos = [
-'vibrate',
-'preloadPage',
-'unPreloadPage',
-'loadSubPackage'];
+'vibrate'];
 
 var canIUses = [];
 
@@ -456,9 +453,7 @@ function processArgs(methodName, fromArgs) {var argsOption = arguments.length > 
           toArgs[keyOption.name ? keyOption.name : key] = keyOption.value;
         }
       } else if (CALLBACKS.indexOf(key) !== -1) {
-        if (isFn(fromArgs[key])) {
-          toArgs[key] = processCallback(methodName, fromArgs[key], returnValue);
-        }
+        toArgs[key] = processCallback(methodName, fromArgs[key], returnValue);
       } else {
         if (!keepFromArgs) {
           toArgs[key] = fromArgs[key];
@@ -573,6 +568,10 @@ var extraApi = /*#__PURE__*/Object.freeze({
 
 
 var getEmitter = function () {
+  if (typeof getUniEmitter === 'function') {
+    /* eslint-disable no-undef */
+    return getUniEmitter;
+  }
   var Emitter;
   return function getUniEmitter() {
     if (!Emitter) {
@@ -659,8 +658,6 @@ Component = function Component() {var options = arguments.length > 0 && argument
 var PAGE_EVENT_HOOKS = [
 'onPullDownRefresh',
 'onReachBottom',
-'onAddToFavorites',
-'onShareTimeline',
 'onShareAppMessage',
 'onPageScroll',
 'onResize',
@@ -947,18 +944,7 @@ function getExtraValue(vm, dataPathsArray) {
       var propPath = dataPathArray[1];
       var valuePath = dataPathArray[3];
 
-      var vFor;
-      if (Number.isInteger(dataPath)) {
-        vFor = dataPath;
-      } else if (!dataPath) {
-        vFor = context;
-      } else if (typeof dataPath === 'string' && dataPath) {
-        if (dataPath.indexOf('#s#') === 0) {
-          vFor = dataPath.substr(3);
-        } else {
-          vFor = vm.__get_value(dataPath, context);
-        }
-      }
+      var vFor = dataPath ? vm.__get_value(dataPath, context) : context;
 
       if (Number.isInteger(vFor)) {
         context = value;
@@ -1008,12 +994,6 @@ function processEventExtra(vm, extra, event) {
         } else {
           if (dataPath === '$event') {// $event
             extraObj['$' + index] = event;
-          } else if (dataPath === 'arguments') {
-            if (event.detail && event.detail.__args__) {
-              extraObj['$' + index] = event.detail.__args__;
-            } else {
-              extraObj['$' + index] = [event];
-            }
           } else if (dataPath.indexOf('$event.') === 0) {// $event.target.value
             extraObj['$' + index] = vm.__get_value(dataPath.replace('$event.', ''), event);
           } else {
@@ -1094,15 +1074,6 @@ function isMatchEventType(eventType, optType) {
 
 }
 
-function getContextVm(vm) {
-  var $parent = vm.$parent;
-  // 父组件是 scoped slots 或者其他自定义组件时继续查找
-  while ($parent && $parent.$parent && ($parent.$options.generic || $parent.$parent.$options.generic || $parent.$scope._$vuePid)) {
-    $parent = $parent.$parent;
-  }
-  return $parent && $parent.$parent;
-}
-
 function handleEvent(event) {var _this = this;
   event = wrapper$1(event);
 
@@ -1135,8 +1106,12 @@ function handleEvent(event) {var _this = this;
         var methodName = eventArray[0];
         if (methodName) {
           var handlerCtx = _this.$vm;
-          if (handlerCtx.$options.generic) {// mp-weixin,mp-toutiao 抽象节点模拟 scoped slots
-            handlerCtx = getContextVm(handlerCtx) || handlerCtx;
+          if (
+          handlerCtx.$options.generic &&
+          handlerCtx.$parent &&
+          handlerCtx.$parent.$parent)
+          {// mp-weixin,mp-toutiao 抽象节点模拟 scoped slots
+            handlerCtx = handlerCtx.$parent.$parent;
           }
           if (methodName === '$emit') {
             handlerCtx.$emit.apply(handlerCtx,
@@ -1186,9 +1161,7 @@ var hooks = [
 'onShow',
 'onHide',
 'onError',
-'onPageNotFound',
-'onThemeChange',
-'onUnhandledRejection'];
+'onPageNotFound'];
 
 
 function parseBaseApp(vm, _ref3)
@@ -1522,7 +1495,7 @@ var uni = {};
 if (typeof Proxy !== 'undefined' && "mp-weixin" !== 'app-plus') {
   uni = new Proxy({}, {
     get: function get(target, name) {
-      if (hasOwn(target, name)) {
+      if (target[name]) {
         return target[name];
       }
       if (baseApi[name]) {
@@ -1721,9 +1694,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 134:
-/*!**************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/static/user/message.png ***!
-  \**************************************************************************/
+/*!******************************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/static/user/message.png ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1732,9 +1705,9 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOsAAADICAYAAAAJ
 /***/ }),
 
 /***/ 135:
-/*!***************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/static/user/favorite.png ***!
-  \***************************************************************************/
+/*!*******************************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/static/user/favorite.png ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1743,9 +1716,9 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACt
 /***/ }),
 
 /***/ 136:
-/*!**************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/static/user/service.png ***!
-  \**************************************************************************/
+/*!******************************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/static/user/service.png ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1754,9 +1727,9 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACt
 /***/ }),
 
 /***/ 155:
-/*!*****************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/utils/index.js ***!
-  \*****************************************************************/
+/*!*********************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/utils/index.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1786,9 +1759,9 @@ module.exports = {
 /***/ }),
 
 /***/ 156:
-/*!*******************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/utils/barcode.js ***!
-  \*******************************************************************/
+/*!***********************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/utils/barcode.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2197,9 +2170,9 @@ var PATTERNS = [
 /***/ }),
 
 /***/ 157:
-/*!******************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/utils/qrcode.js ***!
-  \******************************************************************/
+/*!**********************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/utils/qrcode.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2985,9 +2958,9 @@ var QR = function () {
 /***/ }),
 
 /***/ 18:
-/*!*******************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/wxcomponents/vant-weapp/dialog/dialog.js ***!
-  \*******************************************************************************************/
+/*!***********************************************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/wxcomponents/vant-weapp/dialog/dialog.js ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3072,9 +3045,9 @@ Dialog;exports.default = _default;
 /***/ }),
 
 /***/ 19:
-/*!******************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/pages/login/images/head.png ***!
-  \******************************************************************************/
+/*!**********************************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/pages/login/images/head.png ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -3716,10 +3689,12 @@ if (true) {
   };
 
   formatComponentName = function (vm, includeFile) {
-    if (vm.$root === vm) {
-      if (vm.$options && vm.$options.__file) { // fixed by xxxxxx
-        return ('') + vm.$options.__file
+    {
+      if(vm.$scope && vm.$scope.is){
+        return vm.$scope.is
       }
+    }
+    if (vm.$root === vm) {
       return '<Root>'
     }
     var options = typeof vm === 'function' && vm.cid != null
@@ -3754,7 +3729,7 @@ if (true) {
     if (vm._isVue && vm.$parent) {
       var tree = [];
       var currentRecursiveSequence = 0;
-      while (vm && vm.$options.name !== 'PageBody') {
+      while (vm) {
         if (tree.length > 0) {
           var last = tree[tree.length - 1];
           if (last.constructor === vm.constructor) {
@@ -3766,7 +3741,7 @@ if (true) {
             currentRecursiveSequence = 0;
           }
         }
-        !vm.$options.isReserved && tree.push(vm);
+        tree.push(vm);
         vm = vm.$parent;
       }
       return '\n\nfound in\n\n' + tree
@@ -3789,7 +3764,13 @@ var uid = 0;
  * directives subscribing to it.
  */
 var Dep = function Dep () {
-  this.id = uid++;
+  // fixed by xxxxxx (nvue vuex)
+  /* eslint-disable no-undef */
+  if(typeof SharedObject !== 'undefined'){
+    this.id = SharedObject.uid++;
+  } else {
+    this.id = uid++;
+  }
   this.subs = [];
 };
 
@@ -3826,7 +3807,7 @@ Dep.prototype.notify = function notify () {
 // can be evaluated at a time.
 // fixed by xxxxxx (nvue shared vuex)
 /* eslint-disable no-undef */
-Dep.SharedObject = {};
+Dep.SharedObject = typeof SharedObject !== 'undefined' ? SharedObject : {};
 Dep.SharedObject.target = null;
 Dep.SharedObject.targetStack = [];
 
@@ -8676,15 +8657,6 @@ function cloneWithData(vm) {
     ret[key] = vm[key];
     return ret
   }, ret);
-
-  // vue-composition-api
-  var rawBindings = vm.__secret_vfa_state__ && vm.__secret_vfa_state__.rawBindings;
-  if (rawBindings) {
-    Object.keys(rawBindings).forEach(function (key) {
-      ret[key] = vm[key];
-    });
-  }
-  
   //TODO 需要把无用数据处理掉，比如 list=>l0 则 list 需要移除，否则多传输一份数据
   Object.assign(ret, vm.$mp.data || {});
   if (
@@ -8891,8 +8863,7 @@ function getTarget(obj, path) {
 
 function internalMixin(Vue) {
 
-  Vue.config.errorHandler = function(err, vm, info) {
-    Vue.util.warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
+  Vue.config.errorHandler = function(err) {
     console.error(err);
     /* eslint-disable no-undef */
     var app = getApp();
@@ -9037,10 +9008,7 @@ var LIFECYCLE_HOOKS$1 = [
     'onShow',
     'onHide',
     'onUniNViewMessage',
-    'onPageNotFound',
-    'onThemeChange',
     'onError',
-    'onUnhandledRejection',
     //Page
     'onLoad',
     // 'onShow',
@@ -9050,8 +9018,6 @@ var LIFECYCLE_HOOKS$1 = [
     'onPullDownRefresh',
     'onReachBottom',
     'onTabItemTap',
-    'onAddToFavorites',
-    'onShareTimeline',
     'onShareAppMessage',
     'onResize',
     'onPageScroll',
@@ -9120,9 +9086,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
-/*!***********************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/pages/login/images/icon_user.png ***!
-  \***********************************************************************************/
+/*!***************************************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/pages/login/images/icon_user.png ***!
+  \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9131,9 +9097,9 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACo
 /***/ }),
 
 /***/ 21:
-/*!**********************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/pages/login/images/icon_pwd.png ***!
-  \**********************************************************************************/
+/*!**************************************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/pages/login/images/icon_pwd.png ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9142,9 +9108,9 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAiCAYAAABM
 /***/ }),
 
 /***/ 22:
-/*!*****************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/pages/login/images/icon_pwd_switch.png ***!
-  \*****************************************************************************************/
+/*!*********************************************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/pages/login/images/icon_pwd_switch.png ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9153,9 +9119,9 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAQCAYAAACR
 /***/ }),
 
 /***/ 224:
-/*!********************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/components/lb-picker/utils.js ***!
-  \********************************************************************************/
+/*!************************************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/components/lb-picker/utils.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9172,9 +9138,9 @@ function getIndicatorHeight() {
 /***/ }),
 
 /***/ 23:
-/*!****************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/pages/login/images/qq.png ***!
-  \****************************************************************************/
+/*!********************************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/pages/login/images/qq.png ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9183,9 +9149,9 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABYCAYAAABx
 /***/ }),
 
 /***/ 24:
-/*!********************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/pages/login/images/wechat.png ***!
-  \********************************************************************************/
+/*!************************************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/pages/login/images/wechat.png ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9194,9 +9160,9 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABYCAYAAABx
 /***/ }),
 
 /***/ 25:
-/*!*******************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/pages/login/images/weibo.png ***!
-  \*******************************************************************************/
+/*!***********************************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/pages/login/images/weibo.png ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9205,9 +9171,9 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABYCAYAAABx
 /***/ }),
 
 /***/ 288:
-/*!********************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/components/uni-icons/icons.js ***!
-  \********************************************************************************/
+/*!************************************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/components/uni-icons/icons.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9342,9 +9308,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!*************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/pages.json ***!
-  \*************************************************************/
+/*!*****************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/pages.json ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9353,9 +9319,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 8:
-/*!*****************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/空气采样管理/7_24/common/help.js ***!
-  \*****************************************************************/
+/*!*********************************************************!*\
+  !*** D:/桌面/空气检测/clone/airDetection/7_24/common/help.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9365,7 +9331,7 @@ var userImageurl = "1";
 var phoneNum = "";
 var code = "";
 var sessionId = "";
-var url = "http://d9t582.natappfree.cc";var _default =
+var url = "http://2r2jch.natappfree.cc";var _default =
 {
   userImageurl: userImageurl,
   phoneNum: phoneNum,

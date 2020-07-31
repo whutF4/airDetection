@@ -11,8 +11,14 @@
 	        justify-content: space-around;
 }
 .order{
-	margin-top: 20rpx;
+	/* margin-top: 10rpx; */
 	margin-bottom: calc(100rpx + env(safe-area-inset-bottom) / 2);
+	/* padding: 0 20rpx;
+	background-color: #ffffff; */
+}
+.inorder{
+	margin-top: 10rpx;
+	/* margin-bottom: calc(100upx + env(safe-area-inset-bottom) / 2); */
 	padding: 0 20rpx;
 	background-color: #ffffff;
 }
