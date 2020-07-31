@@ -21,7 +21,7 @@
 				</view>
 				<view class="imgComments">
 					<view class="orderImg">
-						<image src="../../static/zhongjian2.jpg" mode="widthFix"></image>
+						<image :src="orderImgs[index]" mode="widthFix"></image>
 					</view>
 					<view class="commentDetail">
 						<view>{{info.order_contact}}</view>
@@ -55,6 +55,7 @@
 				orderLists: [
 					
 				],
+				orderImgs: [], // 存储列表中户型图第一张图片
 				// pagenum:1,
 				pagesize:5,
 				TabCur:0,
@@ -78,12 +79,13 @@
 				success(res) {
 					console.log(res.data)
 					that.orderLists = res.data
-					// for(var i=0; i<that.orderLists.length;i++){
-					// 	// that.orderLists[i].orderTime = res.data[i].orderTime.split(' ')[0]
-					// 	that.orderLists[i].order_id = res.data[i].order_id.substring(16, 32)
+					for(var i=0; i<that.orderLists.length;i++){
+						// that.orderLists[i].orderTime = res.data[i].orderTime.split(' ')[0]
+						// that.orderLists[i].order_id = res.data[i].order_id.substring(16, 32)
+						that.orderImgs.push(helper.url + '/' + that.orderLists[i].order_modelf.split('@')[0])
 						
 						
-					// }
+					}
 				}
 			})
 			
