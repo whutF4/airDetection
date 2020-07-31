@@ -123,24 +123,40 @@
 			},
 			downLoadFile(index){
 				var that = this
-				const downLoadTask = uni.downloadFile({
-					url: helper.url + '/' + 'filePath',
-					header: {
-						'Content-Type': "multipart/form-data",
+				uni.request({
+					method: 'POST',
+					url: helper.url + '/api/report/show_report_info',
+					header:{
+						'Content-Type': 'application/x-www-form-urlencoded',
 						'Cookie':'JSESSIONID='+helper.sessionId
-					}, 
+					},
+					data:{
+						'order_id': that.orderId
+					},
 					success(res) {
-						if(res.statusCode == 200){
-							uni.saveFile({
-								tempFilePath: res.tempFilePath,
-								success(e) {
-									that.filePath = e.savedFilePath
-									toast('文件下载成功！')
+						console.log("PDF:", res)
+						var filePath = res.data.data
+						const downLoadTask = uni.downloadFile({
+							url: helper.url + '/' + filePath,
+							header: {
+								'Content-Type': "multipart/form-data",
+								'Cookie':'JSESSIONID='+helper.sessionId
+							}, 
+							success(res) {
+								if(res.statusCode == 200){
+									uni.saveFile({
+										tempFilePath: res.tempFilePath,
+										success(e) {
+											that.filePath = e.savedFilePath
+											toast('文件下载成功！')
+										}
+									})
 								}
-							})
-						}
+							}
+						})
 					}
 				})
+				
 			},
 			traceInfo(index){
 				var that = this
