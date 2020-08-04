@@ -29,7 +29,7 @@
 				</swiper> -->
 		<view class="login_form">
 			<view class="input11">
-					<image style="width:27px;height: 27px;"  :src="imgInfo.icon_user" />
+					<image style="width:27px;height: 27px;"  :src="imgInfo.icon_id" />
 					<!-- <input type="text" v-model="username" placeholder="请输入用户手机号"> -->
 					<view class="input11_1">请选择登录身份</view>
 					<view class="input11_2">
@@ -47,7 +47,7 @@
 					<image style="width:27px;height: 27px;"  :src="imgInfo.icon_user" />
 				</view>
 				<!-- <input type="text" v-model="username" placeholder="请输入用户手机号"> -->
-				<input  placeholder="请输入用户手机号" color="" maxlength="11" v-model="username" type="number" @blur="checkTel()"></input>
+				<input  placeholder="请输入登录手机号" color="" maxlength="11" v-model="username" type="number" @blur="checkTel()"></input>
 				<view class="img">
 					<image @tap="delUser" class="img_del" :src="imgInfo.icon_del" />
 				</view>
@@ -55,7 +55,7 @@
 			<view class="line" />
 			<view class="input">
 				<view class="img">
-					<image style="width:20px;height: 25px;" :src="imgInfo.icon_pwd" />
+					<image style="width:27px;height: 27px;" :src="imgInfo.icon_pwd" />
 				</view>
 				<input :type="pwdType" :value="userpwd" @blur="inputPwd" placeholder="请输入密码">			
 				<view class="img" @tap="switchPwd">
@@ -120,10 +120,11 @@
 				current: 0,
 				imgInfo: {
 					head: isUni ? '/static/head.png' : require('./images/head.png'),
-					icon_user: isUni ? '/static/icon_user.png' : require('./images/icon_user.png'),
-					icon_del: '/static/icon_del.png',
+					icon_id:"/static/new/登陆身份.png",
+					icon_user: "/static/new/用户.png",
+					icon_del: '/static/new/关闭.png',
 					to:'/static/user/to.png',
-					icon_pwd: isUni ? '/static/icon_pwd.png' : require('./images/icon_pwd.png'),
+					icon_pwd: "/static/new/密码.png",
 					icon_pwd_switch: isUni ? '/static/icon_pwd_switch.png' : require('./images/icon_pwd_switch.png'),
 					qq: isUni ? '/static/qq.png' : require('./images/qq.png'),
 					wechat: isUni ? '/static/wechat.png' : require('./images/wechat.png'),

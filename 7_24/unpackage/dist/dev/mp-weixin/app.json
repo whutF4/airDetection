@@ -38,6 +38,5 @@
     "uni-list-item": "/components/uni-list-item/uni-list-item",
     "lb-picker": "/components/lb-picker/index",
     "uni-countdown": "/components/uni-countdown/uni-countdown"
-  },
-  "sitemapLocation": "sitemap7.json"
+  }
 }

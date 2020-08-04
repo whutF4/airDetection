@@ -84,7 +84,8 @@
 					"van-dialog": "/wxcomponents/vant-weapp/dialog/index"
 				}
 			}
-		}, {
+		}, 
+		{
 			"path": "pages/reg/reg",
 			"style": {
 				"navigationBarTitleText": "注册",
@@ -92,7 +93,8 @@
 					"van-dialog": "/wxcomponents/vant-weapp/dialog/index"
 				}
 			}
-		}, {
+		}, 
+		{
 			"path": "pages/reg-pwd/reg-pwd",
 			"style": {
 				"navigationBarTitleText": "注册",

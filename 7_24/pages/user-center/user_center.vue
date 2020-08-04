@@ -41,18 +41,23 @@
 					<image class="to" src="../../static/user/to.png"></image>
 				</view> -->
 				<view class="li " @click="historyorder">
-					<view class="icon"><image src="../../static/user/help.png"></image></view>
+					<view class="icon"><image src="../../static/new/购物车.png"></image></view>
 					<view class="text">历史订单</view>
 					<image class="to" src="../../static/user/to.png"></image>
 				</view>
 				<view class="li " @click="report">
-					<view class="icon"><image src="../../static/user/opinion.png"></image></view>
+					<view class="icon"><image src="../../static/new/文档.png"></image></view>
 					<view class="text">检验报告</view>
 					<image class="to" src="../../static/user/to.png"></image>
 				</view>
 				<view class="li " >
-					<view class="icon"><image src="../../static/user/about.png"></image></view>
+					<view class="icon"><image src="../../static/new/发现.png"></image></view>
 					<view class="text">关于我们</view>
+					<image class="to" src="../../static/user/to.png"></image>
+				</view>
+				<view class="li " @click="out">
+					<view class="icon"><image src="../../static/new/退出.png"></image></view>
+					<view class="text">退出登录</view>
 					<image class="to" src="../../static/user/to.png"></image>
 				</view>
 				
@@ -143,6 +148,11 @@
 				uni.navigateTo({
 					url:'../report/report'
 				});
+			},
+			out(){
+				uni.reLaunch({
+					url:'../login/login'
+				})
 			}
 		}
 	}
