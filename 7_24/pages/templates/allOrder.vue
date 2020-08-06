@@ -12,7 +12,7 @@
 						<view class="orderImg">
 							<!-- mode="widthFix" 加载时图片会闪动 -->
 							<!-- <image :src="orderimgs[index]" mode="widthFix"></image> -->
-							<image :src="orderImgs[index]" mode="widthFix"></image>
+							<image :src="orderImgs[index]"></image>
 						</view>
 						<view class="commentDetail">
 							<view>{{info.order_contact}}</view>
@@ -240,6 +240,10 @@
 	.imgComments .orderImg{
 		width: 30%;		
 		margin-right: 20rpx;
+	}
+	.imgComments .orderImg image{
+		width: 250rpx;
+		height: 250rpx;
 	}
 	.imgComments .commentDetail{
 		border-bottom: 2rpx solid #d1d8e6;

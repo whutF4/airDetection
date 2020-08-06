@@ -35,7 +35,7 @@
 		</view>
 			
 		<view class="cu-form-group" v-for="i in imgPath.length" :key='i'>
-			<image :src="imgPath[i]"></image>
+			<image :src="imgPath[i]" mode="aspectFill"></image>
 		</view>
 		
 		<view class="cu-form-group">
@@ -105,7 +105,6 @@
 			console.log('imgpath', info.order_modelf)
 			var imgUrls = info.order_modelf.split('@')
 			for(var i=0;i<imgUrls.length-1;i++){
-				
 				that.imgPath.push(helper.url + '/' + imgUrls[i])
 			}
 			

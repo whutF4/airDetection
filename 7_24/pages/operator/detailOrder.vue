@@ -34,7 +34,7 @@
 			<view class="title">户型图</view>
 		</view>
 		<view class="cu-form-group" v-for="i in imgPath.length" :key="i">
-			<image :src="imgPath[i]"></image>
+			<image :src="imgPath[i]" mode="aspectFill"></image>
 		</view>
 		
 		<view class="cu-form-group">

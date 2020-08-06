@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "上传检测数据",
-  "usingComponents": {
-    "uni-steps": "/components/uni-steps/uni-steps"
-  }
-}

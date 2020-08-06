@@ -130,6 +130,7 @@
 					},
 					data: {
 						// 'applyList': JSON.stringify(that.equipment)
+						'process_id': that.processId,
 						'applyList': that.equipment
 					},
 					success(res) {
@@ -146,15 +147,15 @@
 						'Cookie':'JSESSIONID='+helper.sessionId
 					},
 					data: {
+						'process_id': that.processId,
 						'applyList': that.material
 					},
 					success(res) {
 						console.log(res)
+						uni.navigateTo({
+							url:'module?processId=' + that.processId
+						})
 					}
-				})
-				// console.log('confirm:')
-				uni.navigateTo({
-					url:'module?processId=' + that.processId
 				})
 				
 			}

@@ -169,7 +169,7 @@
 												'process_id': that.processId
 											},
 											success(res) {
-												console.log(res)
+												console.log('结束标志', res)
 											}
 										})
 									}
@@ -190,12 +190,28 @@
 				if((that.describe == '' && that.imgList.length != 0) || (that.describe != '' && that.imgList.length == 0)){
 					toast('描述和图片要一致！')
 					return;
-				}else if(that.describe && that.imgList.length){
+				}else if((that.describe && that.imgList.length) || (that.describe == '' && that.imgList.length == 0)){
+					// 确定施工结束
 					that.nextStep()
+					uni.request({
+						method: 'POST',
+						url: helper.url + '/api/report/end_operate',
+						header:{
+							'Content-Type': 'application/x-www-form-urlencoded',
+							'Cookie':'JSESSIONID='+helper.sessionId
+						},
+						data:{
+							'process_id': that.processId
+						},
+						success(res) {
+							console.log('结束!', res)
+							uni.navigateTo({
+								url:'module?processId=' + that.processId
+							})
+						}
+					})
+					
 				}
-				uni.navigateTo({
-					url:'module?processId=' + that.processId
-				})
 			}
 			
 		}
@@ -205,7 +221,7 @@
 
 <style>
 	.nextStep{
-		width: 20%;
-		margin: 5% 5% 5% 75%;
+		width: 25%;
+		margin: 5% 0 5% 70%;
 	}
 </style>

@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "用户中心",
-  "usingComponents": {
-    "van-dialog": "/wxcomponents/vant-weapp/dialog/index"
-  }
-}

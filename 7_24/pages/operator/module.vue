@@ -19,6 +19,7 @@
 </template>
 
 <script>
+	import helper from "../../common/help.js"
 	export default {
 		name: "components",
 		data() {
@@ -40,22 +41,22 @@
 						title: '施工现场',
 						state:'未完成',
 						img: 'https://image.weilanwl.com/color2.0/plugin/wdh2236.jpg',
-						url: '../plugin/animation'
+						url: ''
 					},
 					{
 						title: '数据检测',
 						state:'未完成',
 						img: 'https://image.weilanwl.com/color2.0/plugin/qpct2148.jpg',
-						url: '../plugin/drawer'
+						url: ''
 					},
 					{
 						title: '空气取样',
 						state:'未完成',
 						img: 'https://image.weilanwl.com/color2.0/plugin/qpczdh2307.jpg',
-						url: '../plugin/verticalnav'
+						url: ''
 					}
 				]
-			};
+			}
 		},
 		onLoad(option) {
 			var that = this
@@ -63,6 +64,33 @@
 			for(var i=0;i<that.processList.length;i++){
 				that.processList[i].url = that.processUrls[i] + that.processId
 			}
+			// 根据 processId 获取订单状态
+			uni.request({
+				url: helper.url+'/api/operator/get_one_infoByProcessId',
+				method: 'POST',
+				header :{
+					// 'Content-Type': 'application/json',
+					// 'Content-Type': "multipart/form-data",
+					'Content-Type': 'application/x-www-form-urlencoded',
+					'Cookie':'JSESSIONID='+helper.sessionId
+				},
+				data: {
+					'process_id': that.processId
+				},
+				success(res) {
+					if(res.statusCode == 200){
+						// process 状态：
+						// 20 初始化  21 设备申请  22 现场施工  23 空气检测  24 空气取样
+						var currentState = res.data.data.pro_state[1]
+						console.log('statecode:', currentState)
+						console.log('state:', res)
+						for(var i=0;i<currentState;i++){
+							that.processList[i].state = "已完成"
+							that.processList[i].url = ''
+						}
+					}
+				}
+			})
 		},
 		methods: {
 			toChild(e) {
