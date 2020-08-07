@@ -133,7 +133,9 @@
 					success(res) {
 						console.log(res.data)
 						// that.orderLists = res.data
-						
+						if(res.data.length==0){
+							return
+						}
 						for(var i=0; i<res.data.length;i++){
 							// that.orderLists[i].orderTime = res.data[i].orderTime.split(' ')[0]
 							// that.orderLists[i].order_id = res.data[i].order_id.substring(16, 32)
@@ -199,7 +201,7 @@
 	}
 	.imgComments .orderImg image{
 		width: 250rpx;
-		height: 250rpx;
+		height: 200rpx;
 	}
 	.imgComments .commentDetail{
 		border-bottom: 2rpx solid #d1d8e6;

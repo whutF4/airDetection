@@ -5,8 +5,9 @@
 				<view @click="detail(index)">
 					<view class="headPart">
 						<view>订单编号 {{info.order_id}}</view>
-						<view class="orderStatus" v-if="info.order_state">完成</view>
-						<view class="orderStatus" v-else>未完成</view>
+						<view class="orderStatus" v-if="info.order_state==2">完成</view>
+						<view class="orderStatus" v-else-if="info.order_state==1">处理中</view>
+						<view class="orderStatus" v-else>未处理</view>
 					</view>
 					<view class="imgComments">
 						<view class="orderImg">
@@ -27,7 +28,7 @@
 					</view>
 				</view>		
 				<view class="footPart">
-					<button type="primary" size="mini" @click="downLoadFile(index)">下载报告</button>
+					<button type="primary" size="mini" @click="downLoadFile(index)" :disabled="info.order_state==2?false:true">下载报告</button>
 					<button type="warn" size="mini" @click="traceInfo(index)">溯源</button>
 				</view>	
 			</view>
@@ -73,7 +74,8 @@
 					
 				],
 				orderImgs: [], // 存储订单列表中第一张户型图地址
-				filePath: ''
+				filePath: '',
+				downLoadFileOfTrace: false
 				
 			}
 		},
@@ -93,10 +95,11 @@
 					console.log(res.data)
 					that.orderLists = res.data
 					for(var i=0; i<that.orderLists.length;i++){
-						that.orderLists[i].order_time = res.data[i].order_time.split(' ')[0]
+						// that.orderLists[i].order_time = res.data[i].order_time.split(' ')[0]
 						that.orderImgs.push(helper.url + '/' + that.orderLists[i].order_modelf.split('@')[0])
 						console.log(that.orderImgs[i])
 					}
+					
 					
 					
 				}
@@ -243,7 +246,7 @@
 	}
 	.imgComments .orderImg image{
 		width: 250rpx;
-		height: 250rpx;
+		height: 200rpx;
 	}
 	.imgComments .commentDetail{
 		border-bottom: 2rpx solid #d1d8e6;
