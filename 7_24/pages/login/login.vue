@@ -120,11 +120,11 @@
 				current: 0,
 				imgInfo: {
 					head: isUni ? '/static/head.png' : require('./images/head.png'),
-					icon_id:"/static/new/登陆身份.png",
-					icon_user: "/static/new/用户.png",
-					icon_del: '/static/new/关闭.png',
+					icon_id:"/static/new/id.png",
+					icon_user: "/static/new/user.png",
+					icon_del: '/static/new/close.png',
 					to:'/static/user/to.png',
-					icon_pwd: "/static/new/密码.png",
+					icon_pwd: "/static/new/pwd.png",
 					icon_pwd_switch: isUni ? '/static/icon_pwd_switch.png' : require('./images/icon_pwd_switch.png'),
 					qq: isUni ? '/static/qq.png' : require('./images/qq.png'),
 					wechat: isUni ? '/static/wechat.png' : require('./images/wechat.png'),
@@ -334,7 +334,7 @@
 	.login_form {
 		display: flex;
 		// margin: 40px;
-		margin-top: 60px;
+		margin-top: 10%;
 		margin-left: 20px;
 		margin-right: 20px;
 		flex-direction: column;
@@ -391,7 +391,7 @@
 	}
 
 	.submit {
-		margin-top: 70px;
+		margin-top: 40px;
 		margin-left: 40px;
 		margin-right: 40px;
 		// color: #2986de;
@@ -440,12 +440,12 @@
 		.text {
 			font-size: 28rpx;
 			color: rgba(200, 200, 200, 1);
-			margin-bottom: 10%;
+			// margin-bottom: 10%;
 		}
 	}
 
 	.quick_login_line {
-		margin-top: 100px;
+		margin-top: 16%;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
