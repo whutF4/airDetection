@@ -1,0 +1,10 @@
+{
+  "backgroundColor": "#f5f6f8",
+  "navigationBarTitleText": "登录",
+  "usingComponents": {
+    "van-button": "/wxcomponents/vant-weapp/button/index",
+    "van-icon": "/wxcomponents/vant-weapp/icon/index",
+    "van-dialog": "/wxcomponents/vant-weapp/dialog/index",
+    "uni-swiper-dot": "/components/uni-ui/uni-swiper-dot/uni-swiper-dot"
+  }
+}
