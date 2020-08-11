@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "注册",
-  "usingComponents": {
-    "van-button": "/wxcomponents/vant-weapp/button/index",
-    "van-dialog": "/wxcomponents/vant-weapp/dialog/index",
-    "uni-swiper-dot": "/components/uni-ui/uni-swiper-dot/uni-swiper-dot"
-  }
-}

@@ -7,26 +7,7 @@
 				</swiper-item>
 			</swiper>
 		</uni-swiper-dot>
-		<!-- <swiper class="screen-swiper round-dot" autoplay=1 duration="500" interval="2000" current="0">
-					<swiper-item style="position: absolute; width: 100%; height: 100%; transform: translate(700%, 0px) translateZ(0px);">
-					<image mode="aspectFill" src="http://www.ccic.com/ccic/resource/cms/2018/05/img_pc_site/2018053114114060944.jpg" role="img"></image>
-					</swiper-item>
-					<swiper-item style="position: absolute; width: 100%; height: 100%; transform: translate(100%, 0px) translateZ(0px);">
-					<image mode="aspectFill" src="http://www.ccic.com/ccic/resource/cms/2018/05/img_pc_site/2018053114114468313.jpg" role="img"></image>
-					</swiper-item>
-					<swiper-item style="position: absolute; width: 100%; height: 100%; transform: translate(200%, 0px) translateZ(0px);">
-					<image mode="aspectFill" src="http://www.ccic.com/ccic/resource/cms/2018/05/img_pc_site/2018053114190979161.jpg" role="img"></image>
-					</swiper-item>
-					<swiper-item style="position: absolute; width: 100%; height: 100%; transform: translate(300%, 0px) translateZ(0px);">
-					<image mode="aspectFill" src="http://www.ccic.com/ccic/resource/cms/2019/08/img_pc_site/2019080116102029148.jpg" role="img"></image>
-					</swiper-item>
-					<swiper-item style="position: absolute; width: 100%; height: 100%; transform: translate(400%, 0px) translateZ(0px);">
-					<image  src="http://www.ccic.com/ccic/resource/cms/2018/05/img_pc_site/2018052723340798399.png" role="img"></image>
-					</swiper-item>
-					<swiper-item style="position: absolute; width: 100%; height: 100%; transform: translate(500%, 0px) translateZ(0px);">
-					<image src="http://www.ccic.com/ccic/resource/cms/2019/06/img_pc_site/2019061310592888128.png"role="img"></image>
-					</swiper-item>
-				</swiper> -->
+		
 		<view class="login_form">
 			<view class="input11">
 					<image style="width:27px;height: 27px;"  :src="imgInfo.icon_id" />
@@ -76,13 +57,6 @@
 				<text @tap="findPwd" class="text">忘记密码？</text>
 			</view>
 		</view>
-		<!-- <view class="quick_login_list">
-			<image @tap="thirdLogin('qq')" class="item" :src="imgInfo.qq" />
-			<image @tap="thirdLogin('wechat')" class="item" :src="imgInfo.wechat" />
-			<van-button icon="https://img.yzcdn.cn/vant/logo.png" type="info">11</van-button>
-			<image @tap="thirdLogin('weibo')" class="item" :src="imgInfo.weibo" />
-		</view> -->
-		<!-- <button type="primary" @click="wxsq">微信授权</button> -->
 		<van-dialog id="van-dialog" />
 	</view>
 </template>

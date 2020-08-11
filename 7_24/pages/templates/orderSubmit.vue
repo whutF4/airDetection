@@ -369,7 +369,7 @@
 											'order_time': that.date + ' ' + that.time,
 											'order_pollution': that.specialPollution,
 											// 'orderPollution': 1,
-											'order_report': that.moreMoney,
+											'order_moremoney': that.moreMoney,
 											// 'orderReport': 1,
 											'order_others': that.orderOther,
 											'order_modelf': that.imgPath

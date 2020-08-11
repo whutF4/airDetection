@@ -25,6 +25,7 @@
 		data() {
 			return {
 				processId: '',
+				moreMoney: '',
 				processUrls: [
 					'stock?processId=',
 					'workReport?processId=',
@@ -61,8 +62,21 @@
 		onLoad(option) {
 			var that = this
 			that.processId = option.processId
+			that.moreMoney = option.moreMoney
+			console.log('moremoney: ', that.moreMoney)
+			if(that.moreMoney == 0){
+				console.log('弹出元素1？', that.processList)
+				that.processList.pop()
+				console.log('弹出元素2？', that.processList)
+			}
+			
 			for(var i=0;i<that.processList.length;i++){
-				that.processList[i].url = that.processUrls[i] + that.processId
+				var moreMoneyStr = ''
+				if(that.processList[i].title != '空气取样'){
+					moreMoneyStr =  '&moreMoney=' + that.moreMoney
+				}
+				that.processList[i].url = that.processUrls[i] + that.processId + moreMoneyStr
+				console.log('当前模块 url：', that.processList[i].url)
 			}
 			// 根据 processId 获取订单状态
 			uni.request({
@@ -81,6 +95,7 @@
 					if(res.statusCode == 200){
 						// process 状态：
 						// 20 初始化  21 设备申请  22 现场施工  23 空气检测  24 空气取样
+						console.log('订单处理状态：', res.data.data)
 						var currentState = res.data.data.pro_state[1]
 						console.log('statecode:', currentState)
 						console.log('state:', res)

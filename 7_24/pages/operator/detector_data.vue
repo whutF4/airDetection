@@ -74,7 +74,7 @@
 			<text class=' text-brown'>(%)</text>
 		</view>
 		<view class="padding flex flex-direction">
-			<button class="cu-btn round line-cyan lg" @click="upload">点击上传</button>
+			<button class="cu-btn round line-cyan lg" @click="upload">{{submitData}}</button>
 		</view>
 	</view>
 </template>
@@ -85,7 +85,9 @@
 		data() {
 			return {
 				processId: '',
-				
+				submitData: '提交',
+				moreMoney: '',
+				endUrl: 'module?processId=',
 				pm1:"",
 				pm1_03:"",
 				pm1_25:"",
@@ -133,7 +135,7 @@
 					success: function (res) {//后端返回数据
 						console.log(res)
 						uni.navigateTo({
-							url:"module?processId=" + that.processId
+							url: that.endUrl + that.processId
 						})
 					},
 				})
@@ -142,16 +144,26 @@
 	
 		onLoad(option) {
 			console.log('processId: ', option.processId)
-			this.processId = option.processId
+			var that = this
+			that.processId = option.processId
+			that.moreMoney = option.moreMoney
+			console.log('detector data onload: ', that.moreMoney)
+			if(that.moreMoney==0){
+				that.endUrl = 'order_lists?that.processId='
+			}
+			
 		}
 	}
 </script>
 
 <style>
-.button1{
-	margin-top: 40rpx;
-	display: flex;
-	/* flex-direction: row; */
-	/* align-items: center; */
-}
+	.button1{
+		margin-top: 40rpx;
+		display: flex;
+		/* flex-direction: row; */
+		/* align-items: center; */
+	}
+	.padding{
+		margin-bottom: 20rpx;
+	}
 </style>

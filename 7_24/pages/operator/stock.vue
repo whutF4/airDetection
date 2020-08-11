@@ -69,22 +69,14 @@
 	export default {
 		data() {
 			return {
-				equipment:[
-					// {name:"反应器",num:1,stock:14},
-					// {name:"充电宝",num:2,stock:17},
-					// {name:"热水壶",num:2,stock:40},
-				],
-				material:[
-					// {name:"反应器",num:1,stock:14},
-					// {name:"充电宝",num:2,stock:17},
-					// {name:"热水壶",num:2,stock:40},
-				],
+				equipment:[],
+				material:[],
 				processId: '',
 				hour: '',
 				minute: '',
 				second: '',
-				time: ''
-				
+				time: '',
+				moreMoney: ''
 			}
 		},
 		methods: {
@@ -153,7 +145,7 @@
 					success(res) {
 						console.log(res)
 						uni.navigateTo({
-							url:'module?processId=' + that.processId
+							url:'module?processId=' + that.processId + '&moreMoney=' + that.moreMoney
 						})
 					}
 				})
@@ -164,6 +156,8 @@
 			var that = this
 			console.log('processId: ', option.processId)
 			that.processId = option.processId
+			that.moreMoney = option.moreMoney
+			console.log('moremoney stock onload:', that.moreMoney)
 			uni.request({
 				url: helper.url+'/api/operator/wx_show_equipment',
 				method: 'GET',

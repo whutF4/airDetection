@@ -51,6 +51,7 @@
 		data() {
 			return {
 				processId: '',
+				moreMoney: '',
 				describe: '',
 				msg:'',
 				limitNum:6, //最多上传图片数量
@@ -67,6 +68,8 @@
 		},
 		onLoad(option) {
 			this.processId = option.processId
+			this.moreMoney = option.moreMoney
+			console.log('work report onload:', this.moreMoney)
 		},
 		methods:{
 			uploadSuccess(res) {
@@ -206,7 +209,7 @@
 						success(res) {
 							console.log('结束!', res)
 							uni.navigateTo({
-								url:'module?processId=' + that.processId
+								url:'module?processId=' + that.processId + '&moreMoney=' + that.moreMoney
 							})
 						}
 					})

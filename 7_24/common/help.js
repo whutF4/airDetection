@@ -3,8 +3,8 @@ const userImageurl = "1";
 const phoneNum="";
 const code="";
 const sessionId="";
-const url="http://2br7j4.natappfree.cc";
-export default {  
+const url="http://udqvwe.natappfree.cc";
+export default {
     userImageurl,
 	phoneNum,
 	code,

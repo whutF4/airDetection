@@ -80,7 +80,7 @@
 				specialPollution: '',
 				date: '',
 				time: '',
-				moreMoney: '是',
+				moreMoney: '无',
 				orderOther: '。。。'
 			}
 		},
@@ -91,14 +91,23 @@
 			that.orderContact = info.order_contact
 			that.orderPhone = info.order_phone
 			that.orderAddress = info.order_address
-			that.orderClass = info.order_class
+			if(info.order_class == '1'){
+				that.orderClass = '工装'
+			}else if(info.order_class == '2'){
+				that.orderClass = '家居'
+			}else if(info.order_class == '3'){
+				that.orderClass = '车辆'
+			}else{
+				that.orderClass = '其它'
+			}
+			
 			that.orderScope = info.order_scope
 			that.orderDescripe = info.order_descripe
-			// that.imgPath = info.orderModelf 不能成功显示图像
 			that.specialPollution = info.order_pollution
 			that.date = info.order_createtime.split(' ')[0]
 			that.time = info.order_createtime.split(' ')[1]
-			// that.moreMoney = info.orderReport 后台未获取
+			if(info.moremoney)
+				that.moreMoney = '是'
 			that.orderOther = info.order_others
 			
 			var imgUrls = info.order_modelf.split('@')

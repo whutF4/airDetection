@@ -205,22 +205,6 @@
 				that.countdown1 = true
 				that.countdown2 = false
 				console.log('输入倒计时长：', that.time)
-				// 总共计时毫秒数
-				// var totleMilliSeconds = that.time * 60 *60 * 1000
-				// setInterval(function(){
-				// 	var innerTotleMilliSeconds = totleMilliSeconds
-				// 	var innerHour = parseInt(innerTotleMilliSeconds/(60*60*1000))
-				// 	innerTotleMilliSeconds %= (60*60*1000)
-				// 	var innerMinute = parseInt(innerTotleMilliSeconds/(60*1000))
-				// 	innerTotleMilliSeconds %= (60*1000)
-				// 	var innerSecond = parseInt(innerTotleMilliSeconds/1000)
-				// 	totleMilliSeconds -= 500
-				// 	that.hour = innerHour
-				// 	that.minute = innerMinute
-				// 	that.second = innerSecond
-				// 	console.log('计时？totleMilliSeconds:', totleMilliSeconds)
-					
-				// }, 500)
 				uni.request({
 					method: 'POST',
 					// 倒计时开始接口

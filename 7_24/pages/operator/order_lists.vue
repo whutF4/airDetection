@@ -60,14 +60,15 @@
 				pageSize:5,
 				pageIndex:0,
 				TabCur:0,
-				orderState:1
+				orderState:1,
+				moreMoney: ''
 				
 			}
 		},
 		onLoad(option){
 			console.log('allOrderSessionId:'+helper.sessionId)
 			var that = this
-			this.addPageData()
+			that.addPageData()
 		},
 		onReachBottom(){
 			var that = this
@@ -90,8 +91,10 @@
 			},
 			confirm(index){
 				var that = this
+				console.log('info: ', that.orderLists[index])
 				console.log('orderId:', that.orderLists[index].order_id)
 				that.orderId = that.orderLists[index].order_id
+				that.moreMoney = that.orderLists[index].order_moremoney
 				uni.request({
 					url: helper.url+'/api/operator/get_one_infoByOrderId',
 					method: 'POST',
@@ -106,9 +109,9 @@
 					},
 					success(res) {
 						console.log('processId:', res.data.data.process_id)
-						// that.processId = res.data.data.process_id
+						console.log('moremoney: ', that.moreMoney)
 						uni.navigateTo({
-							url: 'module?processId=' + res.data.data.process_id
+							url: 'module?processId=' + res.data.data.process_id + '&moreMoney=' + that.moreMoney
 						})
 					}
 				})
@@ -137,8 +140,6 @@
 							return
 						}
 						for(var i=0; i<res.data.length;i++){
-							// that.orderLists[i].orderTime = res.data[i].orderTime.split(' ')[0]
-							// that.orderLists[i].order_id = res.data[i].order_id.substring(16, 32)
 							that.orderLists.push(res.data[i])
 							that.orderImgs.push(helper.url + '/' + res.data[i].order_modelf.split('@')[0])
 						}
