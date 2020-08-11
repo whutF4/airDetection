@@ -35,7 +35,7 @@
 		</view>
 			
 		<view class="cu-form-group" v-for="i in imgPath.length" :key='i'>
-			<image :src="imgPath[i]" mode="aspectFill"></image>
+			<image :src="imgPath[i]" mode="aspectFit"></image>
 		</view>
 		
 		<view class="cu-form-group">
@@ -81,7 +81,7 @@
 				specialPollution: '',
 				date: '',
 				time: '',
-				moreMoney: '是',
+				moreMoney: '',
 				orderOther: '。。。'
 			}
 		},
@@ -100,7 +100,11 @@
 			that.date = info.order_createtime.split(' ')[0]
 			that.time = info.order_createtime.split(' ')[1]
 			// that.moreMoney = info.orderReport 后台未获取
-			that.moreMoney = info.order_report
+			if(info.order_moremoney){
+				that.moreMoney = '是'
+			}else{
+				that.moreMoney = '否'
+			}
 			that.orderOther = info.order_others
 			console.log('imgpath', info.order_modelf)
 			var imgUrls = info.order_modelf.split('@')

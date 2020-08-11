@@ -34,7 +34,7 @@
 			<view class="title">户型图</view>
 		</view>
 		<view class="cu-form-group" v-for="i in imgPath.length" :key="i">
-			<image :src="imgPath[i]" mode="aspectFill"></image>
+			<image :src="imgPath[i]" mode="aspectFit"></image>
 		</view>
 		
 		<view class="cu-form-group">
@@ -80,8 +80,8 @@
 				specialPollution: '',
 				date: '',
 				time: '',
-				moreMoney: '无',
-				orderOther: '。。。'
+				moreMoney: '否',
+				orderOther: ''
 			}
 		},
 		onLoad(option){
@@ -106,7 +106,7 @@
 			that.specialPollution = info.order_pollution
 			that.date = info.order_createtime.split(' ')[0]
 			that.time = info.order_createtime.split(' ')[1]
-			if(info.moremoney)
+			if(info.order_moremoney)
 				that.moreMoney = '是'
 			that.orderOther = info.order_others
 			

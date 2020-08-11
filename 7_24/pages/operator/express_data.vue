@@ -176,8 +176,8 @@
 			confirm(){
 				var that = this
 				console.log(that.express, that.firm)
-				wx.request({
-					url:  helper.url + "/api/operator/update_express",
+				uni.request({
+					url: helper.url + "/api/operator/update_express",
 					method: 'POST',
 					header:{
 						'Content-Type': 'application/json',
@@ -190,10 +190,23 @@
 					},
 					success: function (res) {//后端返回数据
 						console.log(res)
+					},
+				})
+				uni.request({
+					method: 'POST',
+					url: helper.url + '/api/operator/end_order',
+					header:{
+						'Content-Type': 'application/x-www-form-urlencoded',
+						'Cookie':'JSESSIONID='+helper.sessionId
+					},
+					data:{
+						'process_id': that.processId
+					},
+					success(res) {
 						uni.reLaunch({
 							url:"order_lists"
 						})
-					},
+					}
 				})
 			},
 			startTimeCountdown(){

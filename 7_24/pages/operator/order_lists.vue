@@ -26,13 +26,13 @@
 						<image :src="orderImgs[index]"></image>
 					</view>
 					<view class="commentDetail">
-						<view>{{info.order_contact}}</view>
-						<view>{{info.order_address}}</view>
-						<view v-if="info.order_class === '1'">家居</view>
-						<view v-else-if="info.order_class === '2'">车辆</view>
-						<view v-else-if="info.order_class === '3'">工装</view>
-						<view v-else>其它</view>
-						<view>{{info.order_time}}</view>
+						<view class="detailList">{{info.order_contact}}</view>
+						<view class="detailList">{{info.order_address}}</view>
+						<view class="detailList" v-if="info.order_class === '1'">家居</view>
+						<view class="detailList" v-else-if="info.order_class === '2'">车辆</view>
+						<view class="detailList" v-else-if="info.order_class === '3'">工装</view>
+						<view class="detailList" v-else>其它</view>
+						<view class="detailList">{{info.order_time}}</view>
 					</view>
 					
 				</view>
@@ -206,6 +206,10 @@
 	}
 	.imgComments .commentDetail{
 		border-bottom: 2rpx solid #d1d8e6;
+	}
+	.imgComments .commentDetail .detailList{
+		font-size: 30rpx;
+		line-height: 48rpx;
 	}
 	.footPart{
 		display: flex;

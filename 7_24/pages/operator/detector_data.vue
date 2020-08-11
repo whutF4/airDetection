@@ -108,7 +108,7 @@
 		methods: {
 			upload(){
 				var that = this
-				wx.request({
+				uni.request({
 					url:  helper.url + "/api/operator/upload_detection_data",//后端接口地址，需要改成自己的接口地址
 					header:{
 						'Content-Type': 'application/json',
@@ -134,10 +134,23 @@
 					method: 'POST',
 					success: function (res) {//后端返回数据
 						console.log(res)
+					},
+				})
+				uni.request({
+					method: 'POST',
+					url: helper.url + '/api/operator/end_order',
+					header:{
+						'Content-Type': 'application/x-www-form-urlencoded',
+						'Cookie':'JSESSIONID='+helper.sessionId
+					},
+					data:{
+						'process_id': that.processId
+					},
+					success(res) {
 						uni.navigateTo({
 							url: that.endUrl + that.processId
 						})
-					},
+					}
 				})
 			}
 		},
