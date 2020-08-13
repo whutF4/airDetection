@@ -3,13 +3,13 @@
 		<view class="form1">
 		<form>
 			<view class="cu-form-group margin-top">
-				<view class="title">客户姓名</view>
+				<view class="title">客户姓名(必填)</view>
 				<input placeholder="请输入姓名" v-model="orderContact"></input>
 			</view>
 			
 			<view class="cu-form-group">
-				<view class="title">联系电话</view>
-				<input :class="{showMsg: phoneNum}" placeholder="请输入电话" v-model="orderPhone" type="number" @blur="checkTel()"></input>
+				<view class="title">联系电话(必填)</view>
+				<input :class="{showMsg: phoneNum}" placeholder="请输入电话" v-model="orderPhone" type="number" maxlength="11"></input>
 				<view class="cu-capsule radius">
 					<view class='cu-tag bg-blue '>+86</view>
 					<view class="cu-tag line-blue">中国大陆</view>
@@ -17,7 +17,7 @@
 			</view>
 			
 			<view class="cu-form-group">
-				<view class="title">联系地址</view>
+				<view class="title">联系地址(必填)</view>
 				<input placeholder="请输入地址" v-model="orderAddress"></input>
 				<text class='cuIcon-locationfill text-orange'></text>
 			</view>
@@ -39,7 +39,7 @@
 			</radio-group>
 			
 			<view class="cu-form-group">
-				<view class="title">户型面积</view>
+				<view class="title">户型面积(必填)</view>
 				<input placeholder="请输入大小" v-model="orderScope" type="digit"></input>
 			</view>
 			
@@ -49,7 +49,7 @@
 			</view>
 			
 			<view class="cu-bar bg-white margin-top">
-				<view class="action">图片上传</view>
+				<view class="action">图片上传(必填)</view>
 				<view class="action">{{imgList.length}}/{{imgNum}}</view>
 			</view>
 			<view class="cu-form-group">
@@ -120,11 +120,13 @@
 				<view class="text-gray">个人中心</view>
 			</view>
 		</view>
+		<van-dialog id="van-dialog" />
 	</view>
 </template>
 
 <script>
 	import helper from "../../common/help.js"
+	import Dialog from '../../wxcomponents/vant-weapp/dialog/dialog'
 	let toast= msg=>{
 	        uni.showToast({
 	            title: msg,
@@ -324,6 +326,14 @@
 				console.log('sessionId0:' + helper.sessionId)
 				var tempCount = 0
 				var lenImg = that.imgList.length
+				
+				if(that.orderContact==""||that.orderPhone==""||that.orderAddress==""||that.orderScope==""||lenImg==0){
+					uni.showModal({
+					    title: '温馨提示',
+					    content: '您还有必填项没有填写哦',
+						showCancel:false				   
+					});
+				}else{
 				for(var i=0; i<lenImg;i++){
 					toast('图片上传中...')
 					var imgUrl = that.imgList[i]
@@ -393,7 +403,7 @@
 								
 						}
 					})
-				}
+				}}
 				that.imgList = []
 				tempCount = 0
 			}
