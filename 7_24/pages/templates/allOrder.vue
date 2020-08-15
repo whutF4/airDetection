@@ -91,7 +91,6 @@
 					'Cookie': 'JSESSIONID=' + helper.sessionId
 				},
 				success(res) {
-					console.log(res.data)
 					that.orderLists = res.data
 					for (var i = 0; i < that.orderLists.length; i++) {
 						that.orderImgs.push(helper.url + '/' + that.orderLists[i].order_modelf.split('@')[0])
