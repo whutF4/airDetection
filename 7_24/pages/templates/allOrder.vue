@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="order">
-			<view  class="inorder" v-for="(info, index) in orderLists" :key='index'>
+			<view class="inorder" v-for="(info, index) in orderLists" :key='index'>
 				<view @click="detail(index)">
 					<view class="headPart">
 						<view>订单编号 {{info.order_id}}</view>
@@ -24,13 +24,13 @@
 							<view class="detailList" v-else>其它</view>
 							<view class="detailList">{{info.order_time}}</view>
 						</view>
-						
+
 					</view>
-				</view>		
+				</view>
 				<view class="footPart">
 					<button type="primary" size="mini" @click="downLoadFile(index)" :disabled="info.order_state==2?false:true">查看报告</button>
 					<button type="warn" size="mini" @click="traceInfo(index)">溯源</button>
-				</view>	
+				</view>
 			</view>
 		</view>
 		<view class="cu-bar tabbar bg-white shadow foot">
@@ -53,16 +53,16 @@
 				<view class="text-gray">个人中心</view>
 			</view>
 		</view>
-		
+
 	</view>
 </template>
 
 <script>
-	let toast= msg=>{
-	    uni.showToast({
-	        title: msg,
-	        icon:'none'
-	    });
+	let toast = msg => {
+		uni.showToast({
+			title: msg,
+			icon: 'none'
+		});
 	}
 	import helper from "../../common/help.js"
 	export default {
@@ -70,128 +70,96 @@
 			return {
 				processId: '',
 				orderLists: [
-					
+
 				],
 				orderImgs: [], // 存储订单列表中第一张户型图地址
 				filePath: '',
 				downLoadFileOfTrace: false
-				
+
 			}
 		},
-		onLoad(option){
-			console.log('allOrderSessionId:'+helper.sessionId)
+		onLoad(option) {
+			console.log('allOrderSessionId:' + helper.sessionId)
 			var that = this
 			uni.request({
-				url: helper.url+'/api/order/show_my_orders',
+				url: helper.url + '/api/order/show_my_orders',
 				method: 'GET',
-				header :{
+				header: {
 					'Content-Type': 'application/json',
 					// 'Content-Type': "multipart/form-data",
 					// 'Content-Type': 'application/x-www-form-urlencoded',
-					'Cookie':'JSESSIONID='+helper.sessionId
+					'Cookie': 'JSESSIONID=' + helper.sessionId
 				},
 				success(res) {
 					console.log(res.data)
 					that.orderLists = res.data
-					for(var i=0; i<that.orderLists.length;i++){
+					for (var i = 0; i < that.orderLists.length; i++) {
 						// that.orderLists[i].order_time = res.data[i].order_time.split(' ')[0]
 						that.orderImgs.push(helper.url + '/' + that.orderLists[i].order_modelf.split('@')[0])
 						console.log(that.orderImgs[i])
 					}
-					
-					
-					
+
+
+
 				}
 			})
-			
+
 		},
 		methods: {
-			detail(index){
+			detail(index) {
 				var that = this
 				var info = JSON.stringify(that.orderLists[index])
 				uni.navigateTo({
-					url:'detailOrder?info=' + info, 
+					url: 'detailOrder?info=' + info,
 				})
 			},
-			toordersubmit(){
+			toordersubmit() {
 				uni.redirectTo({
-						url: '../templates/orderSubmit'
+					url: '../templates/orderSubmit'
 				});
 			},
-			toallorder(){
+			toallorder() {
 				uni.redirectTo({
-						url: '../templates/allOrder'
+					url: '../templates/allOrder'
 				});
 			},
-			tousercenter(){
+			tousercenter() {
 				uni.redirectTo({
-						url: '../user-center/user_center'
+					url: '../user-center/user_center'
 				});
 			},
-			downLoadFile(index){
+			downLoadFile(index) {
 				var that = this
-				console.log('pdf: order:', that.orderLists[index].order_id)
 				uni.request({
 					method: 'POST',
 					url: helper.url + '/api/report/get_report',
-					header:{
+					header: {
 						'Content-Type': 'application/x-www-form-urlencoded',
-						'Cookie':'JSESSIONID='+helper.sessionId
+						'Cookie': 'JSESSIONID=' + helper.sessionId
 					},
-					data:{
+					data: {
 						'order_id': that.orderLists[index].order_id
 					},
 					success(res) {
 						console.log("PDF:", res)
 						var filePath = res.data.data
-						
 						uni.downloadFile({
-						  url: helper.url + '/' + filePath,
-						  success: function (res) {
-						    var filePath = res.tempFilePath;
-						    uni.openDocument({
-						      filePath: filePath,
-						      success: function (res) {
-						        console.log('打开文档成功');
-						      }
-						    });
-							// uni.saveFile({
-							// 	tempFilePath: res.tempFilePath,
-							// 	success(e) {
-							// 		that.filePath = e.savedFilePath
-							// 		toast('文件下载成功！')
-							// 	}
-							// })
-						  }
+							url: helper.url + '/' + filePath,
+							success: function(res) {
+								var filePath = res.tempFilePath;
+								uni.openDocument({
+									filePath: filePath,
+									success: function(res) {
+										console.log('打开文档成功');
+									}
+								});
+							}
 						});
-						// const downLoadTask = uni.downloadFile({
-						// 	url: helper.url + '/' + filePath,
-						// 	header: {
-						// 		'Content-Type': "multipart/form-data",
-						// 		'Cookie':'JSESSIONID='+helper.sessionId
-						// 	}, 
-						// 	success(res) {
-						// 		console.log("内部res:",res)
-						// 		// if(res.statusCode == 200){
-						// 		// 	console.log("进入")
-									
-						// 		// 	uni.saveFile({
-						// 		// 		tempFilePath: res.tempFilePath,
-						// 		// 		success(e) {
-						// 		// 			that.filePath = e.savedFilePath
-						// 		// 			toast('文件下载成功！')
-						// 		// 		}
-						// 		// 	})
-						// 		// }
-								
-						// 	}
-							
-						// })
 					}
 				})
-				
+
 			},
-			traceInfo(index){
+			traceInfo(index) {
 				var that = this
 				var info = JSON.stringify(that.orderLists[index])
 				// console.log('orderId:', that.orderLists[index].order_id)
@@ -205,66 +173,75 @@
 </script>
 
 <style>
-	.box{
+	.box {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-around;
 	}
-	.order{
+
+	.order {
 		/* margin-top: 10rpx; */
 		margin-bottom: calc(100upx + env(safe-area-inset-bottom) / 2);
 		/* padding: 0 20rpx;
 		background-color: #ffffff; */
-		
+
 	}
-	.inorder{
+
+	.inorder {
 		margin-top: 10rpx;
 		/* margin-bottom: calc(100upx + env(safe-area-inset-bottom) / 2); */
 		padding: 0 20rpx;
 		background-color: #ffffff;
 	}
-	.headPart{
+
+	.headPart {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		padding: 20rpx 0;
 		border-bottom: 2rpx solid #d1d8e6;
 	}
-	.headPart .orderStatus{
+
+	.headPart .orderStatus {
 		color: #fea900;
 	}
-	.headPart .orderStatus2{
+
+	.headPart .orderStatus2 {
 		color: #39B54A;
 	}
-	.imgComments{
+
+	.imgComments {
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-start;
 		padding: 20rpx 0;
 		border-bottom: 2rpx solid #d1d8e6;
 	}
-	.imgComments .orderImg{
-		width: 30%;		
+
+	.imgComments .orderImg {
+		width: 30%;
 		margin-right: 20rpx;
 	}
-	.imgComments .orderImg image{
+
+	.imgComments .orderImg image {
 		width: 250rpx;
 		height: 200rpx;
 	}
-	.imgComments .commentDetail{
+
+	.imgComments .commentDetail {
 		border-bottom: 2rpx solid #d1d8e6;
 	}
-	.imgComments .commentDetail .detailList{
+
+	.imgComments .commentDetail .detailList {
 		font-size: 30rpx;
 		line-height: 48rpx;
 	}
-	.footPart{
+
+	.footPart {
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-end;
 		padding: 20rpx 0;
 		margin-left: 50%;
 	}
-
 </style>
-
