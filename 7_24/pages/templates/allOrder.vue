@@ -5,9 +5,9 @@
 				<view @click="detail(index)">
 					<view class="headPart">
 						<view>订单编号 {{info.order_id}}</view>
-						<view class="orderStatus" v-if="info.order_state==2">完成</view>
+						<view class="orderStatus2" v-if="info.order_state==2">完成</view>
 						<view class="orderStatus" v-else-if="info.order_state==1">处理中</view>
-						<view class="orderStatus" v-else>未处理</view>
+						<view class="orderStatus" v-else-if="info.order_state==0">未处理</view>
 					</view>
 					<view class="imgComments">
 						<view class="orderImg">
@@ -16,19 +16,19 @@
 							<image :src="orderImgs[index]"></image>
 						</view>
 						<view class="commentDetail">
-							<view>{{info.order_contact}}</view>
-							<view>{{info.order_address}}</view>
-							<view v-if="info.order_class === '1'">家居</view>
-							<view v-else-if="info.order_class === '2'">车辆</view>
-							<view v-else-if="info.order_class === '3'">工装</view>
-							<view v-else>其它</view>
-							<view>{{info.order_time}}</view>
+							<view class="detailList">{{info.order_contact}}</view>
+							<view class="detailList">{{info.order_address}}</view>
+							<view class="detailList" v-if="info.order_class === '1'">家居</view>
+							<view class="detailList" v-else-if="info.order_class === '2'">车辆</view>
+							<view class="detailList" v-else-if="info.order_class === '3'">工装</view>
+							<view class="detailList" v-else>其它</view>
+							<view class="detailList">{{info.order_time}}</view>
 						</view>
 						
 					</view>
 				</view>		
 				<view class="footPart">
-					<button type="primary" size="mini" @click="downLoadFile(index)" :disabled="info.order_state==2?false:true">下载报告</button>
+					<button type="primary" size="mini" @click="downLoadFile(index)" :disabled="info.order_state==2?false:true">查看报告</button>
 					<button type="warn" size="mini" @click="traceInfo(index)">溯源</button>
 				</view>	
 			</view>
@@ -69,7 +69,6 @@
 		data() {
 			return {
 				processId: '',
-				orderId: '',
 				orderLists: [
 					
 				],
@@ -131,6 +130,7 @@
 			},
 			downLoadFile(index){
 				var that = this
+				console.log('pdf: order:', that.orderLists[index].order_id)
 				uni.request({
 					method: 'POST',
 					url: helper.url + '/api/report/get_report',
@@ -139,7 +139,7 @@
 						'Cookie':'JSESSIONID='+helper.sessionId
 					},
 					data:{
-						// 'order_id': that.orderId
+						'order_id': that.orderLists[index].order_id
 					},
 					success(res) {
 						console.log("PDF:", res)
@@ -233,6 +233,9 @@
 	.headPart .orderStatus{
 		color: #fea900;
 	}
+	.headPart .orderStatus2{
+		color: #39B54A;
+	}
 	.imgComments{
 		display: flex;
 		flex-direction: row;
@@ -250,6 +253,10 @@
 	}
 	.imgComments .commentDetail{
 		border-bottom: 2rpx solid #d1d8e6;
+	}
+	.imgComments .commentDetail .detailList{
+		font-size: 30rpx;
+		line-height: 48rpx;
 	}
 	.footPart{
 		display: flex;
