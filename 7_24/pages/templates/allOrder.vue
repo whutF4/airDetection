@@ -94,9 +94,7 @@
 					console.log(res.data)
 					that.orderLists = res.data
 					for (var i = 0; i < that.orderLists.length; i++) {
-						// that.orderLists[i].order_time = res.data[i].order_time.split(' ')[0]
 						that.orderImgs.push(helper.url + '/' + that.orderLists[i].order_modelf.split('@')[0])
-						console.log(that.orderImgs[i])
 					}
 
 
