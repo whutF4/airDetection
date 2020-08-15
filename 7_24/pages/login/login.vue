@@ -38,7 +38,7 @@
 				<view class="img">
 					<image style="width:27px;height: 27px;" :src="imgInfo.icon_pwd" />
 				</view>
-				<input :type="pwdType" :value="userpwd" @blur="inputPwd" placeholder="请输入密码">			
+				<input :password="pwdType" :value="userpwd" @blur="inputPwd" placeholder="请输入密码">			
 				<view class="img" @tap="switchPwd">
 					<image class="img_pwd_switch" :src="imgInfo.icon_pwd_switch" />
 				</view>
@@ -74,7 +74,7 @@
 				phoneNum:"",
 				username: '',
 				userpwd: '',
-				pwdType: 'password',
+				pwdType: 'ture',
 				userImageurl:helper.userImageurl,
 				info: [{
 				    content: '国内第一，世界知名的检查认证机构',
@@ -124,7 +124,8 @@
 				
 			},
 			switchPwd() {
-				this.pwdType = this.pwdType === 'text' ? 'password' : 'text'
+				var nopwdType = !this.pwdType;
+				this.pwdType = nopwdType
 			},
 			PickerChange(e) {
 				this.model = e.detail.value
