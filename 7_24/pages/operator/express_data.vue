@@ -1,9 +1,9 @@
 <template>
 	<view>
 		
-		<view class="margin-top">
+		<!-- <view class="margin-top">
 			<uni-steps :options="[{title: '设备选择'}, {title: '检测结果'}, {title: '快递信息'}]" :active="2"></uni-steps>
-		</view>
+		</view> -->
 		<view class="margin-top timeDown">
 			<uni-countdown color="#FFFFFF" background-color="#00B26A" border-color="#00B26A" :show-day="false" :hour="hour" :minute="minute" :second="second"></uni-countdown>
 		</view>

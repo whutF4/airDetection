@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<view class="margin-top">
+		<!-- <view class="margin-top">
 			<uni-steps :options="[{title: '设备选择'}, {title: '检测结果'}, {title: '快递信息'}]" :active="0"></uni-steps>
-		</view>
+		</view> -->
 		<view class="cu-form-group margin-top">
 			<view class="title">设备名称</view>
 			<text class=''>数量选择</text>

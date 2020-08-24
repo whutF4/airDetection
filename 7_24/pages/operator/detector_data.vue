@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<view class="margin-top">
+		<!-- <view class="margin-top">
 			<uni-steps :options="[{title: '设备选择'}, {title: '检测结果'}, {title: '快递信息'}]" :active="1"></uni-steps>
-		</view>
+		</view> -->
 		<view class="cu-form-group margin-top">
 			<view class="title">PM1.0数据</view>
 			<input placeholder="请输入PM1.0粒子数密度" v-model="pm1" type="digit"></input>
