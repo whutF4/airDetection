@@ -165,7 +165,7 @@
 					// }
 					// else{
 						if(this.model==1){
-							wx.request({
+							uni.request({
 								// url:helper.url+'/api/user/wx_login_user',
 								url:helper.url+'/api/operator/wx_login_operator',
 								method:'POST',
@@ -210,7 +210,7 @@
 								}
 							})							
 						}else{
-							wx.request({
+							uni.request({
 								url:helper.url+'/api/user/wx_login_user',
 								// url:helper.url+'/api/operator/wx_login_operator',
 								method:'POST',

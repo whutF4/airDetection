@@ -7,15 +7,14 @@
 				</swiper-item>
 			</swiper>
 		</uni-swiper-dot>
-		<view class="page_reg">			
-			<!-- <text class="tip">点击获取短信验证码，发送至{{phone}}</text> -->
+		<view class="page_reg">
 			<view class="code" >
-				<input class='text1' type="text" style="font-size: 30rpx;" v-model='phone' maxlength="11" placeholder="请输入手机号" @blur='checkTel()'/>
+				<input class='text1' type='number' style="font-size: 30rpx;" v-model='phone' maxlength="11" placeholder="请输入手机号" @blur='checkTel()'/>
 				<!-- <button class="submit" >获取验证码</button> -->
 				<img class="delphone" @click="switchphone" src="/static/del.png" >
 			</view>
 			<view class="code">
-				<input class='text1' type="text" style="font-size: 30rpx;" value="" placeholder="请输入验证码" />
+				<input class='text1' type="text" style="font-size: 30rpx;" value="" placeholder="请输入验证码(可跳过)" />
 				<button class="submit" @click="yanzhengma" >{{buttonname}}</button>
 			</view>
 			<view class="code">
@@ -29,7 +28,7 @@
 			<view class="serviceloc" style="width: 100%;">
 				<label class="checkbox">
 					<!-- <checkbox class="round-blue" value="" checked /> -->
-					<checkbox class="round blue"value="C"role="checkbox"aria-disabled="false"aria-checked="false">
+					<checkbox class="round blue" value="C" role="checkbox" aria-disabled="false" aria-checked="false">
 					</checkbox>
 					<text class="protocol_tip">我已阅读并同意</text>
 				</label>
