@@ -3,12 +3,14 @@
 		<view class="form1">
 		<form>
 			<view class="cu-form-group margin-top">
-				<view class="title">客户姓名(必填)</view>
+				<!-- <view class="title">客户姓名(必填)</view> -->
+				<view class="title"><span class="star">*</span>客户姓名</view>
 				<input placeholder="请输入姓名" v-model="orderContact"></input>
 			</view>
 			
 			<view class="cu-form-group">
-				<view class="title">联系电话(必填)</view>
+				<!-- <view class="title">联系电话(必填)</view> -->
+				<view class="title"><span class="star">*</span>联系电话</view>
 				<input :class="{showMsg: phoneNum}" placeholder="请输入电话" v-model="orderPhone" type="number" maxlength="11"></input>
 				<view class="cu-capsule radius">
 					<view class='cu-tag bg-blue '>+86</view>
@@ -17,7 +19,8 @@
 			</view>
 			
 			<view class="cu-form-group">
-				<view class="title">联系地址(必填)</view>
+				<!-- <view class="title">联系地址(必填)</view> -->
+				<view class="title"><span class="star">*</span>联系地址</view>
 				<input placeholder="请输入地址" v-model="orderAddress"></input>
 				<text class='cuIcon-locationfill text-orange'></text>
 			</view>
@@ -39,7 +42,8 @@
 			</radio-group>
 			
 			<view class="cu-form-group">
-				<view class="title">户型面积(必填)</view>
+				<!-- <view class="title">户型面积(必填)</view> -->
+				<view class="title"><span class="star">*</span>户型面积</view>
 				<input placeholder="请输入大小" v-model="orderScope" type="digit"></input>
 			</view>
 			
@@ -49,7 +53,8 @@
 			</view>
 			
 			<view class="cu-bar bg-white margin-top">
-				<view class="action">图片上传(必填)</view>
+				<!-- <view class="action">图片上传(必填)</view> -->
+				<view class="action"><span class="star">*</span>图片上传</view>
 				<view class="action">{{imgList.length}}/{{imgNum}}</view>
 			</view>
 			<view class="cu-form-group">
@@ -415,6 +420,9 @@
 <style>
 	.cu-form-group .title {
 		min-width: calc(4em + 15px);
+	}
+	.cu-form-group .title .star, .margin-top .action .star{
+		color: #ff0000;
 	}
 	.cu-form-group .checkBox{
 		display: flex;

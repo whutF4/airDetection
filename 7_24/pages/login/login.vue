@@ -420,7 +420,7 @@
 	}
 
 	.quick_login_line {
-		margin-top: 16%;
+		margin-top: 10%;
 		display: flex;
 		flex-direction: row;
 		align-items: center;

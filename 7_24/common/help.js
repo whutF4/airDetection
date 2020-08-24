@@ -3,7 +3,7 @@ const userImageurl = "1";
 const phoneNum="";
 const code="";
 const sessionId="";
-const url="http://hvhiv.natappfree.cc";
+const url="http://fogfore.top:8080";
 export default {
     userImageurl,
 	phoneNum,
