@@ -28,7 +28,7 @@
 					</view>
 				</view>
 				<view class="footPart">
-					<button type="primary" size="mini" @click="downLoadFile(index)" :disabled="info.order_state==2?false:true">查看报告</button>
+					<button type="primary" size="mini" @click="downLoadFile(index)" :disabled="info.order_state>=2?false:true">查看报告</button>
 					<button type="warn" size="mini" @click="traceInfo(index)">溯源</button>
 				</view>
 			</view>
